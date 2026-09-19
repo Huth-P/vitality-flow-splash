@@ -62,6 +62,13 @@
   --color-plum: var(--plum);
   --color-plum-deep: var(--plum-deep);
   --color-cream: var(--cream);
+  /* Change category screen (Step 4) colours */
+  --color-vf-tile: var(--vf-tile);
+  --color-vf-lavender: var(--vf-lavender);
+  --color-vf-disc-coral: var(--vf-disc-coral);
+  --color-vf-disc-apricot: var(--vf-disc-apricot);
+  --color-vf-disc-teal: var(--vf-disc-teal);
+  --color-vf-disc-lilac: var(--vf-disc-lilac);
 }
 
 :root {
@@ -69,6 +76,13 @@
   --plum: #4a2b4e;
   --plum-deep: #37203a;
   --cream: #f4eee7;
+  /* Change category screen (Step 4) colours */
+  --vf-tile: #f7f1e8;
+  --vf-lavender: #dbc7e5;
+  --vf-disc-coral: #e87368;
+  --vf-disc-apricot: #f3b57d;
+  --vf-disc-teal: #318b84;
+  --vf-disc-lilac: #987caf;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);

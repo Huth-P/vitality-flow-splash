@@ -65,6 +65,8 @@
 
 :root {
   --radius: 0.625rem;
+  --plum: #4a2b4e;
+  --cream: #f4eee7;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);

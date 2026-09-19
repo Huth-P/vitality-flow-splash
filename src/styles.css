@@ -60,12 +60,14 @@
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-plum: var(--plum);
+  --color-plum-deep: var(--plum-deep);
   --color-cream: var(--cream);
 }
 
 :root {
   --radius: 0.625rem;
   --plum: #4a2b4e;
+  --plum-deep: #37203a;
   --cream: #f4eee7;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);

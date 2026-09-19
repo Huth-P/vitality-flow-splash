@@ -23,6 +23,23 @@ export const Route = createFileRoute("/age-range")({
 function AgeRange() {
   const navigate = useNavigate({ from: "/age-range" });
   const [selected, setSelected] = useState<string>("");
+  const [saveMessage, setSaveMessage] = useState("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!selected) return;
+
+    try {
+      window.localStorage.setItem(
+        "vf.onboarding.step2",
+        JSON.stringify({ age_range: selected }),
+      );
+      setSaveMessage("");
+      navigate({ to: "/onboarding-step-3" });
+    } catch {
+      setSaveMessage("We couldn't save your answer right now — please try again.");
+    }
+  };
 
   return (
     <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-plum-deep p-0 sm:p-6">
@@ -39,22 +56,23 @@ function AgeRange() {
           </div>
         </div>
 
-        <form className="absolute inset-x-0 top-[174px] bottom-6 flex flex-col px-6" onSubmit={(event) => { event.preventDefault(); if (selected) navigate({ to: "/onboarding-step-3" }); }}>
+        <form className="absolute inset-x-0 top-[150px] bottom-6 flex flex-col px-6" onSubmit={handleSubmit}>
           <h1 className="text-[28px] font-semibold leading-[1.08]">What is your age range?</h1>
-          <p id="age-help" className="mt-5 text-[13px] leading-5 text-[#737080]">This helps us provide more relevant educational information.</p>
-          <fieldset aria-describedby="age-help" className="mt-7 space-y-3">
+          <p id="age-help" className="mt-6 text-[16px] leading-6 text-[#737080]">This helps us provide more relevant educational information.</p>
+          <fieldset aria-describedby="age-help" className="mt-10 space-y-3">
             <legend className="sr-only">Age range</legend>
             {AGE_OPTIONS.map((option) => {
               const checked = selected === option;
               return (
                 <label key={option} className={`flex min-h-[64px] cursor-pointer items-center justify-between rounded-[12px] border px-4 text-[15px] outline-none focus-within:ring-[3px] focus-within:ring-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
                   <span>{option}</span>
-                  <input type="radio" name="age-range" value={option} checked={checked} onChange={() => setSelected(option)} className="sr-only" />
+                  <input type="radio" name="age-range" value={option} checked={checked} onChange={() => { setSelected(option); setSaveMessage(""); }} className="sr-only" />
                   <span aria-hidden="true" className={`size-5 shrink-0 rounded-full border ${checked ? "border-plum bg-plum" : "border-[#B9B4B9] bg-white"}`} />
                 </label>
               );
             })}
           </fieldset>
+          <p role="alert" className="mt-3 min-h-5 text-[13px] leading-5 text-plum">{saveMessage}</p>
           <Button type="submit" disabled={!selected} className="mt-auto h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-cream shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">Continue &gt;</Button>
         </form>
       </main>

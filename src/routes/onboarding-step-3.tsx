@@ -40,14 +40,17 @@ function MainFocus() {
   const [saveMessage, setSaveMessage] = useState("");
 
   const resolvedSelections = selected.map((option) =>
-    option === OTHER_OPTION ? otherLabel.trim() : option,
+    option === OTHER_OPTION ? otherLabel : option,
   );
-  const canContinue = resolvedSelections.length > 0 && resolvedSelections.every(Boolean);
+  const canContinue = resolvedSelections.length > 0 && resolvedSelections.every((option) => option.trim().length > 0);
 
   const toggleOption = (option: string) => {
     setSaveMessage("");
     setSelected((current) => {
-      if (current.includes(option)) return current.filter((item) => item !== option);
+      if (current.includes(option)) {
+        if (option === OTHER_OPTION) setOtherLabel("");
+        return current.filter((item) => item !== option);
+      }
       if (current.length >= 3) return current;
       return [...current, option];
     });
@@ -127,9 +130,15 @@ function MainFocus() {
                           id="other-symptom"
                           value={otherLabel}
                           onChange={(event) => { setOtherLabel(event.target.value); setSaveMessage(""); }}
+                          onBlur={(event) => {
+                            if (event.target.value.trim()) return;
+                            setOtherLabel("");
+                            setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                          }}
                           maxLength={80}
                           autoComplete="off"
-                          className="mt-1 h-11 w-full rounded-[10px] border border-[#D5D0D5] bg-white px-3 text-[14px] outline-none focus-visible:ring-[3px] focus-visible:ring-plum"
+                          autoFocus
+                          className="mt-1 h-9 w-full border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[14px] outline-none focus-visible:border-plum focus-visible:ring-0"
                         />
                       </div>
                     )}

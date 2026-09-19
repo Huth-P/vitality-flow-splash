@@ -11,4 +11,4 @@
 - [x] Replace the Welcome logo mark with the supplied artwork
 - [x] Persist Age Range Step 2 and verify retry behaviour
 - [x] Build and verify Main Focus Step 3 and its Step 4 destination
-- [ ] Place the Step 3 “Other” input inline and verify existing selection, save, clearing, and cap behaviour
+- [x] Place the Step 3 “Other” input inline and verify existing selection, save, clearing, and cap behaviour

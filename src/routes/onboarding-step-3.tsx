@@ -140,7 +140,7 @@ function MainFocus() {
                         checked={checked}
                         onChange={() => toggleOption(option)}
                         aria-label={option}
-                        className="sr-only"
+                        className="sr-only left-3 top-1.5"
                       />
                       <label htmlFor="main-focus-other" aria-hidden="true" className={`size-5 shrink-0 cursor-pointer rounded-full border ${checked ? "border-plum bg-plum" : "border-[#B9B4B9] bg-white"}`} />
                     </div>

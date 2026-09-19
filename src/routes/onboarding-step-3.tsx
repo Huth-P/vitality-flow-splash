@@ -107,28 +107,45 @@ function MainFocus() {
               {SYMPTOM_OPTIONS.map((option) => {
                 const checked = selected.includes(option);
                 const isMain = selected[0] === option;
+                if (option === OTHER_OPTION && checked) {
+                  return (
+                    <div key={option} className="flex min-h-[48px] items-center gap-2 rounded-[12px] border-2 border-plum bg-cream px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum">
+                      <label htmlFor="main-focus-other" className="shrink-0 cursor-pointer">{option}</label>
+                      <input
+                        id="other-symptom"
+                        aria-label="Describe your symptom"
+                        value={otherLabel}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          setOtherLabel(value);
+                          setSaveMessage("");
+                          if (!value && otherLabel) {
+                            setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                          }
+                        }}
+                        maxLength={80}
+                        autoComplete="off"
+                        className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
+                      />
+                      {isMain && <span className="shrink-0 rounded-full bg-plum px-2 py-1 text-[10px] font-semibold text-cream">Main focus</span>}
+                      <input
+                        id="main-focus-other"
+                        type="checkbox"
+                        name="main-focus"
+                        value={option}
+                        checked
+                        onChange={() => toggleOption(option)}
+                        aria-label={option}
+                        className="sr-only"
+                      />
+                      <label htmlFor="main-focus-other" aria-hidden="true" className="size-5 shrink-0 cursor-pointer rounded-full border border-plum bg-plum" />
+                    </div>
+                  );
+                }
                 return (
                   <div key={option}>
                     <label className={`flex min-h-[48px] cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
-                      <span className={option === OTHER_OPTION && checked ? "shrink-0" : "min-w-0 flex-1"}>{option}</span>
-                      {option === OTHER_OPTION && checked && (
-                        <input
-                          id="other-symptom"
-                          aria-label="Describe your symptom"
-                          value={otherLabel}
-                          onChange={(event) => {
-                            const value = event.target.value;
-                            setOtherLabel(value);
-                            setSaveMessage("");
-                            if (!value && otherLabel) {
-                              setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
-                            }
-                          }}
-                          maxLength={80}
-                          autoComplete="off"
-                          className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
-                        />
-                      )}
+                      <span className="min-w-0 flex-1">{option}</span>
                       {isMain && <span className="shrink-0 rounded-full bg-plum px-2 py-1 text-[10px] font-semibold text-cream">Main focus</span>}
                       <input
                         type="checkbox"

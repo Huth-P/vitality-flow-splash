@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgeRangeRouteImport } from './routes/age-range'
 import { Route as JourneyStageRouteImport } from './routes/journey-stage'
+import { Route as OnboardingStep3RouteImport } from './routes/onboarding-step-3'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
 const IndexRoute = IndexRouteImport.update({
@@ -18,9 +20,19 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AgeRangeRoute = AgeRangeRouteImport.update({
+  id: '/age-range',
+  path: '/age-range',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const JourneyStageRoute = JourneyStageRouteImport.update({
   id: '/journey-stage',
   path: '/journey-stage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OnboardingStep3Route = OnboardingStep3RouteImport.update({
+  id: '/onboarding-step-3',
+  path: '/onboarding-step-3',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WelcomeRoute = WelcomeRouteImport.update({
@@ -31,31 +43,46 @@ const WelcomeRoute = WelcomeRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/age-range': typeof AgeRangeRoute
   '/journey-stage': typeof JourneyStageRoute
+  '/onboarding-step-3': typeof OnboardingStep3Route
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/age-range': typeof AgeRangeRoute
   '/journey-stage': typeof JourneyStageRoute
+  '/onboarding-step-3': typeof OnboardingStep3Route
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/age-range': typeof AgeRangeRoute
   '/journey-stage': typeof JourneyStageRoute
+  '/onboarding-step-3': typeof OnboardingStep3Route
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/journey-stage' | '/welcome'
+  fullPaths:
+    '/' | '/age-range' | '/journey-stage' | '/onboarding-step-3' | '/welcome'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/journey-stage' | '/welcome'
-  id: '__root__' | '/' | '/journey-stage' | '/welcome'
+  to: '/' | '/age-range' | '/journey-stage' | '/onboarding-step-3' | '/welcome'
+  id:
+    | '__root__'
+    | '/'
+    | '/age-range'
+    | '/journey-stage'
+    | '/onboarding-step-3'
+    | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgeRangeRoute: typeof AgeRangeRoute
   JourneyStageRoute: typeof JourneyStageRoute
+  OnboardingStep3Route: typeof OnboardingStep3Route
   WelcomeRoute: typeof WelcomeRoute
 }
 
@@ -68,11 +95,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/age-range': {
+      id: '/age-range'
+      path: '/age-range'
+      fullPath: '/age-range'
+      preLoaderRoute: typeof AgeRangeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/journey-stage': {
       id: '/journey-stage'
       path: '/journey-stage'
       fullPath: '/journey-stage'
       preLoaderRoute: typeof JourneyStageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/onboarding-step-3': {
+      id: '/onboarding-step-3'
+      path: '/onboarding-step-3'
+      fullPath: '/onboarding-step-3'
+      preLoaderRoute: typeof OnboardingStep3RouteImport
       parentRoute: typeof rootRouteImport
     }
     '/welcome': {
@@ -87,7 +128,9 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgeRangeRoute: AgeRangeRoute,
   JourneyStageRoute: JourneyStageRoute,
+  OnboardingStep3Route: OnboardingStep3Route,
   WelcomeRoute: WelcomeRoute,
 }
 export const routeTree = rootRouteImport

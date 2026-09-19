@@ -106,7 +106,7 @@ function MainFocus() {
                 const isMain = selected[0] === option;
                 return (
                   <div key={option}>
-                    <label className={`flex min-h-[48px] cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:ring-[3px] focus-within:ring-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
+                    <label className={`flex min-h-[48px] cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
                       <span className="min-w-0 flex-1">{option}</span>
                       {isMain && <span className="shrink-0 rounded-full bg-plum px-2 py-1 text-[10px] font-semibold text-cream">Main focus</span>}
                       <input

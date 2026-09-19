@@ -64,7 +64,7 @@ function AgeRange() {
             {AGE_OPTIONS.map((option) => {
               const checked = selected === option;
               return (
-                <label key={option} className={`flex min-h-[64px] cursor-pointer items-center justify-between rounded-[12px] border px-4 text-[15px] outline-none focus-within:ring-[3px] focus-within:ring-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
+                <label key={option} className={`flex min-h-[64px] cursor-pointer items-center justify-between rounded-[12px] border px-4 text-[15px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
                   <span>{option}</span>
                   <input type="radio" name="age-range" value={option} checked={checked} onChange={() => { setSelected(option); setSaveMessage(""); }} className="sr-only" />
                   <span aria-hidden="true" className={`size-5 shrink-0 rounded-full border ${checked ? "border-plum bg-plum" : "border-[#B9B4B9] bg-white"}`} />

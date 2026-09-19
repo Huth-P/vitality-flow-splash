@@ -55,7 +55,7 @@ function AgeRange() {
               );
             })}
           </fieldset>
-          <Button type="submit" disabled={!selected} className="mt-auto h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-cream shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">Continue →</Button>
+          <Button type="submit" disabled={!selected} className="mt-auto h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-cream shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">Continue &gt;</Button>
         </form>
       </main>
     </div>

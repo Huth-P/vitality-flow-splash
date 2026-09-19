@@ -80,7 +80,7 @@ function JourneyStage() {
             handleContinue();
           }}
         >
-          <h1 id="journey-heading" className="max-w-[12ch] text-[28px] font-semibold leading-[1.08]">Where are you in your journey?</h1>
+          <h1 id="journey-heading" className="max-w-[16ch] text-[28px] font-semibold leading-[1.08]">Where are you in your journey?</h1>
           <p id="journey-help" className="mt-4 text-[16px] leading-6 text-[#737080]">Choose the option that feels closest to you right now.</p>
 
           <fieldset aria-describedby="journey-help" className="mt-7 space-y-3">
@@ -113,7 +113,7 @@ function JourneyStage() {
           <div className="mt-auto">
             {saveMessage ? <p role="alert" className="mb-3 text-center text-sm text-[#737080]">{saveMessage}</p> : null}
             <Button type="submit" disabled={!selected} className="h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-cream shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">
-              Continue →
+              Continue &gt;
             </Button>
           </div>
         </form>

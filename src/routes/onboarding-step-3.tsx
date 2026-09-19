@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 
@@ -38,6 +38,13 @@ function MainFocus() {
   const [selected, setSelected] = useState<string[]>([]);
   const [otherLabel, setOtherLabel] = useState("");
   const [saveMessage, setSaveMessage] = useState("");
+  const otherInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    if (!selected.includes(OTHER_OPTION)) return;
+    const focusTimer = window.setTimeout(() => otherInputRef.current?.focus(), 0);
+    return () => window.clearTimeout(focusTimer);
+  }, [selected]);
 
   const resolvedSelections = selected.map((option) =>
     option === OTHER_OPTION ? otherLabel : option,
@@ -127,6 +134,7 @@ function MainFocus() {
                       <div className="mt-2 pl-2">
                         <label htmlFor="other-symptom" className="text-[12px] font-medium text-[#2A292F]">Describe your symptom</label>
                         <input
+                          ref={otherInputRef}
                           id="other-symptom"
                           value={otherLabel}
                           onChange={(event) => { setOtherLabel(event.target.value); setSaveMessage(""); }}
@@ -137,7 +145,6 @@ function MainFocus() {
                           }}
                           maxLength={80}
                           autoComplete="off"
-                          autoFocus
                           className="mt-1 h-9 w-full border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[14px] outline-none focus-visible:border-plum focus-visible:ring-0"
                         />
                       </div>

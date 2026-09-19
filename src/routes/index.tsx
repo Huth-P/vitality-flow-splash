@@ -64,28 +64,22 @@ function Splash() {
         onPointerDown={go}
         className={`${leaving ? "vf-fade-out" : "vf-fade-in"} relative flex h-dvh max-h-[932px] w-full max-w-[430px] flex-col items-center justify-center overflow-hidden rounded-none bg-plum outline-none focus-visible:ring-[3px] focus-visible:ring-cream/90 focus-visible:ring-offset-0 sm:h-[932px] sm:rounded-[32px]`}
       >
-        {/* Logo mark — brushstroke "Vf" */}
+        {/* Logo mark — exact artwork paths from the supplied source */}
         <svg
-          viewBox="0 0 200 160"
+          viewBox="700 300 610 500"
           className="w-[52%]"
-          style={{ aspectRatio: "200 / 160" }}
+          style={{ aspectRatio: "610 / 500" }}
           aria-hidden="true"
           focusable="false"
         >
-          <g
-            fill="none"
-            stroke="var(--cream)"
-            strokeWidth="17"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {/* Left arm of the V */}
-            <path d="M34 40 C40 66 50 90 62 108" />
-            {/* Right stroke rising into the f ascender with a hooked top */}
-            <path d="M62 108 C80 90 96 62 108 36 C113 24 124 17 138 18 C148 19 155 25 156 33" />
-            {/* f crossbar */}
-            <path d="M80 64 C100 56 124 53 148 56" />
-          </g>
+          <path
+            d="M1206.78 580.812C1185.16 656.442 1092.94 561.6 1034.16 687.241C1019.77 713.102 1001.45 758.975 979.191 778.824C876.55 861.134 852.859 583.485 750.414 547.667C703.603 528.714 727.505 463.987 773.241 463.645C880.425 457.29 894.671 707.48 945.748 726.726C996.58 724.053 993.095 562.936 1123.43 543.87C1154.87 538.899 1213.11 532.642 1206.8 580.812H1206.78Z"
+            fill="var(--cream)"
+          />
+          <path
+            d="M1168.78 463.987C1052.43 475.411 1000.39 553.843 961.59 653.948C958.317 659.815 950.616 659.587 950.681 651.243C965.009 520.827 1054.4 382.622 1198.08 382.133C1226.56 383.909 1269.29 371.736 1286.69 399.896C1304.91 431.086 1272.97 464.851 1240.47 462.423C1216.16 462.211 1192.84 461.641 1168.78 464.004V463.987Z"
+            fill="var(--cream)"
+          />
         </svg>
 
         {/* Wordmark */}

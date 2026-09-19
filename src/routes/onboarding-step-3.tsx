@@ -129,11 +129,13 @@ function MainFocus() {
                         <input
                           id="other-symptom"
                           value={otherLabel}
-                          onChange={(event) => { setOtherLabel(event.target.value); setSaveMessage(""); }}
-                          onBlur={(event) => {
-                            if (event.target.value.trim()) return;
-                            setOtherLabel("");
-                            setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                          onChange={(event) => {
+                            const value = event.target.value;
+                            setOtherLabel(value);
+                            setSaveMessage("");
+                            if (!value && otherLabel) {
+                              setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                            }
                           }}
                           maxLength={80}
                           autoComplete="off"

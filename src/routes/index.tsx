@@ -84,7 +84,7 @@ function Splash() {
             {/* Right stroke rising into the f ascender with a hooked top */}
             <path d="M62 108 C80 90 96 62 108 36 C113 24 124 17 138 18 C148 19 155 25 156 33" />
             {/* f crossbar */}
-            <path d="M74 70 C96 61 122 57 148 60" />
+            <path d="M80 64 C100 56 124 53 148 56" />
           </g>
         </svg>
 

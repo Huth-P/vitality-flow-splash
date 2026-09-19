@@ -109,26 +109,28 @@ function MainFocus() {
                 const isMain = selected[0] === option;
                 if (option === OTHER_OPTION) {
                   return (
-                    <div key={option} className={`flex min-h-[48px] items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
-                      <label htmlFor="main-focus-other" className="shrink-0 cursor-pointer">{option}</label>
-                      {checked ? (
-                        <input
-                          id="other-symptom"
-                          aria-label="Describe your symptom"
-                          value={otherLabel}
-                          onChange={(event) => {
-                            const value = event.target.value;
-                            setOtherLabel(value);
-                            setSaveMessage("");
-                            if (!value && otherLabel) {
-                              setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
-                            }
-                          }}
-                          maxLength={80}
-                          autoComplete="off"
-                          className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
-                        />
-                      ) : <span className="flex-1" />}
+                    <div key={option} className={`relative flex min-h-[48px] items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
+                      <span className="flex min-w-0 flex-1 items-center gap-2">
+                        <label htmlFor="main-focus-other" className="shrink-0 cursor-pointer">{option}</label>
+                        {checked ? (
+                          <input
+                            id="other-symptom"
+                            aria-label="Describe your symptom"
+                            value={otherLabel}
+                            onChange={(event) => {
+                              const value = event.target.value;
+                              setOtherLabel(value);
+                              setSaveMessage("");
+                              if (!value && otherLabel) {
+                                setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                              }
+                            }}
+                            maxLength={80}
+                            autoComplete="off"
+                            className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
+                          />
+                        ) : null}
+                      </span>
                       {isMain && <span className="shrink-0 rounded-full bg-plum px-2 py-1 text-[10px] font-semibold text-cream">Main focus</span>}
                       <input
                         id="main-focus-other"

@@ -58,7 +58,7 @@ function Splash() {
         {/* Logo mark */}
         <svg
           viewBox="0 0 220 150"
-          className="w-[42%]"
+          className="w-[54%]"
           style={{ aspectRatio: "220 / 150" }}
           aria-hidden="true"
           focusable="false"
@@ -67,9 +67,9 @@ function Splash() {
             {/* Left arm of the V — thick at the top, tapering to the point */}
             <path d="M20 26 C33 12 52 16 64 36 C78 59 90 85 101 112 C96 124 86 126 78 114 C63 89 45 55 27 40 C18 33 14 32 20 26 Z" />
             {/* Right arm sweeping up into the f ascender — point at the bottom, thick hook at the top */}
-            <path d="M78 114 C86 126 99 124 107 109 C120 85 138 56 161 36 C172 26 186 19 200 18 C199 30 191 40 178 50 C156 67 138 92 126 117 C118 133 96 136 78 114 Z" />
-            {/* f crossbar — tapered brushstroke sweeping to the right */}
-            <path d="M118 74 C138 65 166 58 202 56 C208 61 205 69 195 71 C170 76 146 81 130 85 C120 87 112 80 118 74 Z" />
+            <path d="M78 114 C86 126 99 124 107 109 C120 85 140 54 164 32 C176 21 192 15 208 17 C204 30 194 40 180 52 C158 70 138 96 126 117 C118 133 96 136 78 114 Z" />
+            {/* f crossbar — tapered brushstroke crossing the stem, sweeping to the right */}
+            <path d="M124 56 C148 46 180 40 214 44 C219 50 215 59 203 61 C178 65 150 70 134 73 C123 75 117 61 124 56 Z" />
           </g>
         </svg>
 

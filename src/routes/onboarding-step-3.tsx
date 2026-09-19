@@ -40,14 +40,17 @@ function MainFocus() {
   const [saveMessage, setSaveMessage] = useState("");
 
   const resolvedSelections = selected.map((option) =>
-    option === OTHER_OPTION ? otherLabel.trim() : option,
+    option === OTHER_OPTION ? otherLabel : option,
   );
-  const canContinue = resolvedSelections.length > 0 && resolvedSelections.every(Boolean);
+  const canContinue = resolvedSelections.length > 0 && resolvedSelections.every((option) => option.trim().length > 0);
 
   const toggleOption = (option: string) => {
     setSaveMessage("");
     setSelected((current) => {
-      if (current.includes(option)) return current.filter((item) => item !== option);
+      if (current.includes(option)) {
+        if (option === OTHER_OPTION) setOtherLabel("");
+        return current.filter((item) => item !== option);
+      }
       if (current.length >= 3) return current;
       return [...current, option];
     });
@@ -104,6 +107,43 @@ function MainFocus() {
               {SYMPTOM_OPTIONS.map((option) => {
                 const checked = selected.includes(option);
                 const isMain = selected[0] === option;
+                if (option === OTHER_OPTION) {
+                  return (
+                    <div key={option} className={`flex min-h-[48px] items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
+                      <label htmlFor="main-focus-other" className="shrink-0 cursor-pointer">{option}</label>
+                      {checked ? (
+                        <input
+                          id="other-symptom"
+                          aria-label="Describe your symptom"
+                          value={otherLabel}
+                          onChange={(event) => {
+                            const value = event.target.value;
+                            setOtherLabel(value);
+                            setSaveMessage("");
+                            if (!value && otherLabel) {
+                              setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                            }
+                          }}
+                          maxLength={80}
+                          autoComplete="off"
+                          className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
+                        />
+                      ) : <span className="flex-1" />}
+                      {isMain && <span className="shrink-0 rounded-full bg-plum px-2 py-1 text-[10px] font-semibold text-cream">Main focus</span>}
+                      <input
+                        id="main-focus-other"
+                        type="checkbox"
+                        name="main-focus"
+                        value={option}
+                        checked={checked}
+                        onChange={() => toggleOption(option)}
+                        aria-label={option}
+                        className="sr-only"
+                      />
+                      <label htmlFor="main-focus-other" aria-hidden="true" className={`size-5 shrink-0 cursor-pointer rounded-full border ${checked ? "border-plum bg-plum" : "border-[#B9B4B9] bg-white"}`} />
+                    </div>
+                  );
+                }
                 return (
                   <div key={option}>
                     <label className={`flex min-h-[48px] cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
@@ -120,19 +160,6 @@ function MainFocus() {
                       />
                       <span aria-hidden="true" className={`size-5 shrink-0 rounded-full border ${checked ? "border-plum bg-plum" : "border-[#B9B4B9] bg-white"}`} />
                     </label>
-                    {option === OTHER_OPTION && checked && (
-                      <div className="mt-2 pl-2">
-                        <label htmlFor="other-symptom" className="text-[12px] font-medium text-[#2A292F]">Describe your symptom</label>
-                        <input
-                          id="other-symptom"
-                          value={otherLabel}
-                          onChange={(event) => { setOtherLabel(event.target.value); setSaveMessage(""); }}
-                          maxLength={80}
-                          autoComplete="off"
-                          className="mt-1 h-11 w-full rounded-[10px] border border-[#D5D0D5] bg-white px-3 text-[14px] outline-none focus-visible:ring-[3px] focus-visible:ring-plum"
-                        />
-                      </div>
-                    )}
                   </div>
                 );
               })}

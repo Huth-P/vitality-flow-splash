@@ -134,7 +134,7 @@ function ChangeCategory() {
 
           <div className="shrink-0 bg-white px-6 pb-6 pt-2">
             <p role="alert" className="mb-2 min-h-5 text-[13px] leading-5 text-plum">{saveMessage}</p>
-            <Button type="submit" disabled={!selected} className="h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-cream shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">Continue ></Button>
+            <Button type="submit" disabled={!selected} className="h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-cream shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">Continue &gt;</Button>
           </div>
         </form>
       </main>

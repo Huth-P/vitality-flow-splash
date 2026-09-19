@@ -110,7 +110,25 @@ function MainFocus() {
                 return (
                   <div key={option}>
                     <label className={`flex min-h-[48px] cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-cream" : "border-[#D5D0D5] bg-white"}`}>
-                      <span className="min-w-0 flex-1">{option}</span>
+                      <span className={option === OTHER_OPTION && checked ? "shrink-0" : "min-w-0 flex-1"}>{option}</span>
+                      {option === OTHER_OPTION && checked && (
+                        <input
+                          id="other-symptom"
+                          aria-label="Describe your symptom"
+                          value={otherLabel}
+                          onChange={(event) => {
+                            const value = event.target.value;
+                            setOtherLabel(value);
+                            setSaveMessage("");
+                            if (!value && otherLabel) {
+                              setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
+                            }
+                          }}
+                          maxLength={80}
+                          autoComplete="off"
+                          className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
+                        />
+                      )}
                       {isMain && <span className="shrink-0 rounded-full bg-plum px-2 py-1 text-[10px] font-semibold text-cream">Main focus</span>}
                       <input
                         type="checkbox"
@@ -123,26 +141,6 @@ function MainFocus() {
                       />
                       <span aria-hidden="true" className={`size-5 shrink-0 rounded-full border ${checked ? "border-plum bg-plum" : "border-[#B9B4B9] bg-white"}`} />
                     </label>
-                    {option === OTHER_OPTION && checked && (
-                      <div className="mt-2 pl-2">
-                        <label htmlFor="other-symptom" className="text-[12px] font-medium text-[#2A292F]">Describe your symptom</label>
-                        <input
-                          id="other-symptom"
-                          value={otherLabel}
-                          onChange={(event) => {
-                            const value = event.target.value;
-                            setOtherLabel(value);
-                            setSaveMessage("");
-                            if (!value && otherLabel) {
-                              setSelected((current) => current.filter((item) => item !== OTHER_OPTION));
-                            }
-                          }}
-                          maxLength={80}
-                          autoComplete="off"
-                          className="mt-1 h-9 w-full border-0 border-b-2 border-[#D5D0D5] bg-transparent px-0 text-[14px] outline-none focus-visible:border-plum focus-visible:ring-0"
-                        />
-                      </div>
-                    )}
                   </div>
                 );
               })}

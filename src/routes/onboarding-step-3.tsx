@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ChevronLeft } from "lucide-react";
 
@@ -38,13 +38,6 @@ function MainFocus() {
   const [selected, setSelected] = useState<string[]>([]);
   const [otherLabel, setOtherLabel] = useState("");
   const [saveMessage, setSaveMessage] = useState("");
-  const otherInputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (!selected.includes(OTHER_OPTION)) return;
-    const focusTimer = window.setTimeout(() => otherInputRef.current?.focus(), 0);
-    return () => window.clearTimeout(focusTimer);
-  }, [selected]);
 
   const resolvedSelections = selected.map((option) =>
     option === OTHER_OPTION ? otherLabel : option,
@@ -134,7 +127,6 @@ function MainFocus() {
                       <div className="mt-2 pl-2">
                         <label htmlFor="other-symptom" className="text-[12px] font-medium text-[#2A292F]">Describe your symptom</label>
                         <input
-                          ref={otherInputRef}
                           id="other-symptom"
                           value={otherLabel}
                           onChange={(event) => { setOtherLabel(event.target.value); setSaveMessage(""); }}

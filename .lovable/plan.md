@@ -21,7 +21,8 @@
 
 ## Main Focus — Step 3 of 4
 - Replace the placeholder with the reference-matched device layout: status time, accessible back control to Age Range, centred “Step 3 of 4” label, progress indicator, semantic heading, supporting copy, symptom list, and fixed-bottom Continue button.
-- Include the ten reference choices: Trouble sleeping; Hot flashes or night sweats; Mood swings or irritability; Brain fog or memory lapses; Joint or muscle aches; Low energy or fatigue; Weight changes; Low interest in sex; Anxiety or feeling on edge; plus one final bundled symptom choice matching the supplied reference/layout set.
+- Include the nine named reference choices plus “Other”. Selecting “Other” reveals a labelled text field where the user can add their own symptom wording; a non-empty entry becomes the actual saved label and participates in the same three-choice limit.
+- Preserve the custom label’s spelling exactly in local storage so it can support a future, separately scoped opt-in sharing feature; do not transmit or aggregate it now.
 - Implement a labelled multi-select group capped at three choices. The first active selection is `main_focus`; later selections are `tracked_alongside`. If the main choice is removed, promote the earliest remaining selection.
 - Show “Main focus” only on the first active choice. Keep Continue disabled until at least one choice is selected.
 - Save `{ main_focus, tracked_alongside }` to `vf.onboarding.step3` on Continue. If saving fails, show the same calm inline message and leave Continue enabled for retry.

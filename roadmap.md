@@ -12,3 +12,4 @@
 - [x] Persist Age Range Step 2 and verify retry behaviour
 - [x] Build and verify Main Focus Step 3 and its Step 4 destination
 - [x] Place the Step 3 “Other” input inline and verify existing selection, save, clearing, and cap behaviour
+- [ ] Build Change category Step 4 of 4: 2×3 icon tiles, single-select, save vf.onboarding.step4a, verify styling, a11y, and retry behaviour

@@ -108,7 +108,7 @@ function ChangeDetails() {
               <p className="mt-1 text-[14px] text-[#29252A]">Add the details for your chosen change.</p>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto px-[23px] pb-3 pt-[17px]">
+            <div className="min-h-0 flex-1 overflow-y-auto px-[23px] pb-3 pt-[11px]">
               {isStepper ? (
                 <StepperRow category={chosen.category} value={stepValue} unit={unit} step={step} maximum={maximum} onDecrease={() => updateStep(-step)} onIncrease={() => updateStep(step)} onKeyDown={handleStepKeys} />
               ) : (

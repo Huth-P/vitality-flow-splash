@@ -24,6 +24,11 @@ The app is designed for self-tracking and educational purposes and does not prov
   
 ## Team
 
-Built collaboratively by a team of four during the Elevate Women Global Hackathon 2026.
+Built collaboratively during the Elevate Women Global Hackathon 2026 by:
+
+- [Pamela Huth](https://github.com/Huth-P)
+- [Karina](https://github.com/Karinasvela)
+- [Nnenna](https://github.com/NnennaMazi)
+- [Julieta](https://github.com/julietameschiniluppi)
 
 _More project documentation coming soon._

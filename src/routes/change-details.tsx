@@ -266,7 +266,7 @@ function DropdownRow({ category, options, selection, otherDraft, onSelectionChan
           id={selectId}
           value={selection}
           onChange={(event) => onSelectionChange(event.target.value)}
-          className="absolute inset-0 cursor-pointer opacity-0"
+          className={selection === "Other" ? "absolute bottom-3 right-4 size-11 cursor-pointer opacity-0" : "absolute inset-0 cursor-pointer opacity-0"}
           aria-label={`${category} option`}
         >
           <option value="">Choose an option</option>

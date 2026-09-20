@@ -11,9 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgeRangeRouteImport } from './routes/age-range'
+import { Route as ChangeDetailsRouteImport } from './routes/change-details'
 import { Route as JourneyStageRouteImport } from './routes/journey-stage'
 import { Route as OnboardingStep3RouteImport } from './routes/onboarding-step-3'
 import { Route as OnboardingStep4RouteImport } from './routes/onboarding-step-4'
+import { Route as TransitionRouteImport } from './routes/transition'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 
 const IndexRoute = IndexRouteImport.update({
@@ -24,6 +26,11 @@ const IndexRoute = IndexRouteImport.update({
 const AgeRangeRoute = AgeRangeRouteImport.update({
   id: '/age-range',
   path: '/age-range',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChangeDetailsRoute = ChangeDetailsRouteImport.update({
+  id: '/change-details',
+  path: '/change-details',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JourneyStageRoute = JourneyStageRouteImport.update({
@@ -41,6 +48,11 @@ const OnboardingStep4Route = OnboardingStep4RouteImport.update({
   path: '/onboarding-step-4',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TransitionRoute = TransitionRouteImport.update({
+  id: '/transition',
+  path: '/transition',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const WelcomeRoute = WelcomeRouteImport.update({
   id: '/welcome',
   path: '/welcome',
@@ -50,26 +62,32 @@ const WelcomeRoute = WelcomeRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
+  '/change-details': typeof ChangeDetailsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
+  '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
+  '/change-details': typeof ChangeDetailsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
+  '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
+  '/change-details': typeof ChangeDetailsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
+  '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
 }
 export interface FileRouteTypes {
@@ -77,34 +95,42 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/age-range'
+    | '/change-details'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
+    | '/transition'
     | '/welcome'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/age-range'
+    | '/change-details'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
+    | '/transition'
     | '/welcome'
   id:
     | '__root__'
     | '/'
     | '/age-range'
+    | '/change-details'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
+    | '/transition'
     | '/welcome'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgeRangeRoute: typeof AgeRangeRoute
+  ChangeDetailsRoute: typeof ChangeDetailsRoute
   JourneyStageRoute: typeof JourneyStageRoute
   OnboardingStep3Route: typeof OnboardingStep3Route
   OnboardingStep4Route: typeof OnboardingStep4Route
+  TransitionRoute: typeof TransitionRoute
   WelcomeRoute: typeof WelcomeRoute
 }
 
@@ -122,6 +148,13 @@ declare module '@tanstack/react-router' {
       path: '/age-range'
       fullPath: '/age-range'
       preLoaderRoute: typeof AgeRangeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/change-details': {
+      id: '/change-details'
+      path: '/change-details'
+      fullPath: '/change-details'
+      preLoaderRoute: typeof ChangeDetailsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journey-stage': {
@@ -145,6 +178,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof OnboardingStep4RouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/transition': {
+      id: '/transition'
+      path: '/transition'
+      fullPath: '/transition'
+      preLoaderRoute: typeof TransitionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/welcome': {
       id: '/welcome'
       path: '/welcome'
@@ -158,9 +198,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgeRangeRoute: AgeRangeRoute,
+  ChangeDetailsRoute: ChangeDetailsRoute,
   JourneyStageRoute: JourneyStageRoute,
   OnboardingStep3Route: OnboardingStep3Route,
   OnboardingStep4Route: OnboardingStep4Route,
+  TransitionRoute: TransitionRoute,
   WelcomeRoute: WelcomeRoute,
 }
 export const routeTree = rootRouteImport

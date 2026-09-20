@@ -19,3 +19,4 @@
 - [x] Build and verify Daily Check-in Screen 08 with local saves, confirmation, and Daily Dashboard handoff
 - [x] Replace Daily Check-in symptom selection with change-aware 0–5 ratings and verify compatibility
 - [x] Show only the onboarding focus symptoms on Daily Check-in, with calm fallback and profile write-through
+- [x] Build Check-in Complete Screen 09 with streak pill, once-daily confetti, and /progress placeholder

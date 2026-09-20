@@ -182,6 +182,11 @@
     sans-serif;
 }
 
+.vf-focus-ring {
+  outline: 3px solid var(--plum);
+  outline-offset: 2px;
+}
+
 @utility vf-fade-in {
   animation: vf-fade 0.9s ease-out both;
 }

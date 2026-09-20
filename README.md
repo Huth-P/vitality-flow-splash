@@ -15,8 +15,13 @@ The app is designed for self-tracking and educational purposes and does not prov
 ## Built With
 
 - Lovable
+- React
 - TypeScript
-
+- TanStack Start
+- TanStack Router
+- Tailwind CSS
+- Radix UI
+  
 ## Team
 
 Built collaboratively by a team of four during the Elevate Women Global Hackathon 2026.

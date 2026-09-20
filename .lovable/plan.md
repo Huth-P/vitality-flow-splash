@@ -14,7 +14,10 @@
 - Add the keyboard-accessible back affordance, semantic “Tell us a bit more” heading, exact subtitle, fixed Finish CTA, inline message area, and visible privacy footer:
   - “Your selections stay on this device. Nothing is sent to a server.”
   - “Data stays on this device.”
-- Read and safely parse `vf.chosenChange` after mount. Show static placeholders during that local read, then render either the matching category control or the calm missing-data state with one “Go back” action.
+- Read and safely parse `vf.chosenChange` after mount. Show static placeholders during that local read, then render either the matching category control or the calm missing-data state with this verbatim copy:
+  - Heading: “Hmm, we lost that.”
+  - Body: “Not you → us. Your choice didn't save properly. Let's go find it again.”
+  - Button: “Go back”
 - Keep unfinished choices only in component state. No draft storage or intermediate keys.
 
 ## Category controls
@@ -28,7 +31,7 @@
 [ right: shrink-0 fixed chevron ]
 ```
 
-- Selecting Other reveals a labelled, same-row underlined field (`h-7`, `max-w-32`, bottom border only), capped at 60 characters. Keystrokes remain local React state; the committed custom value is captured on blur and included only in the final profile save.
+- Selecting Other reveals a labelled, same-row underlined field (`h-7`, `max-w-32`, bottom border only), capped at 60 characters, with a live visible character counter such as “42/60” as the user types. Keystrokes remain local React state; the committed custom value is captured on blur and included only in the final profile save.
 - Meditation: one centred, relative duration stepper, default 10 minutes, ±5, clamped 0–120.
 - Hydration: one centred, relative glasses stepper, default 8, ±1, clamped 0–30.
 - Both steppers expose value semantics, have labelled 44px buttons, support ArrowUp/ArrowDown on the focused stepper, and announce changes politely.

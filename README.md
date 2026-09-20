@@ -8,9 +8,13 @@ Vitality Flow is a privacy-first wellness tracking app designed to help women na
 
 ## About
 
-Vitality Flow helps women focus on one change at a time and observe how they feel over time using their own data.
+Vitality Flow is a privacy-first wellness tracking app designed to support women navigating perimenopause and menopause.
 
-The app is designed for self-tracking and educational purposes and does not provide medical diagnosis or treatment.
+Through a simple onboarding flow, users can identify their main focus, choose one lifestyle change to track, and define what they want to observe over time — one change at a time.
+
+The current MVP stores user selections locally on the device and does not require an account or send this data to a server.
+
+Vitality Flow is designed for self-tracking and educational purposes and does not provide medical diagnosis or treatment.
 
 ## Built With
 

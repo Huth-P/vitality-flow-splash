@@ -18,7 +18,7 @@ Changes in sleep, energy, mood, memory, and other symptoms can be difficult to u
 
 Vitality Flow gives women a simple way to track what they are experiencing, focus on one lifestyle change at a time, and observe how their selected symptoms evolve.
 
-Rather than relying only on memory, users can build a clearer record of their own experience and use it to reflect on patterns and support more informed conversations with healthcare professionals.
+Rather than relying only on memory, users can build a clearer record of their own experience, reflect on possible patterns, and use that information to support more informed conversations with healthcare professionals.
 
 Vitality Flow is designed for self-tracking and educational purposes. It does not provide medical diagnosis or treatment.
 
@@ -61,35 +61,59 @@ Depending on the selected category, users can add more specific information abou
 
 Users record how they are feeling through simple daily check-ins focused on the symptoms they selected during onboarding.
 
-### 4. See progress over time
+### 4. See progress and possible patterns
 
-After 10 days of tracking, Vitality Flow can begin presenting the user's recorded information as trends and possible patterns.
+Vitality Flow brings check-in data together through progress visualisations and insights, helping users notice possible patterns in their own records over time.
 
-These insights describe changes in the user's own records. They are not intended to establish medical conclusions or prove that a lifestyle change caused a particular outcome.
+These insights describe changes in the user's recorded information. They are not intended to establish medical conclusions or prove that a lifestyle change caused a particular outcome.
 
-### 5. Prepare for a healthcare conversation
+### 5. Support better conversations
 
-Vitality Flow is designed to turn tracked information into a simple summary that can help users remember what they experienced and support conversations with healthcare professionals.
+The insights are designed to help users reflect on what they have recorded, remember changes over time, and prepare for more informed conversations with healthcare professionals.
 
 ---
 
 ## Current MVP
 
-The hackathon MVP focuses on one core journey:
+The current prototype supports the core Vitality Flow journey:
 
-**Onboarding → Choose symptoms → Select one focus → Choose one lifestyle change → Check in → View progress and insights → Summary**
+**Onboarding → Choose symptoms → Select a main focus → Choose one lifestyle change → Daily check-ins → View progress → Explore insights**
 
-The current prototype is designed around:
+The MVP currently includes:
 
-- guided perimenopause and menopause onboarding;
+- guided onboarding;
 - symptom selection and prioritisation;
 - one-change-at-a-time tracking;
 - daily symptom check-ins;
 - progress and trend visualisation;
-- educational, non-diagnostic insights;
-- a summary of the user's tracked experience.
+- educational, non-diagnostic insights.
+
+A Summary entry point is included in the prototype, while the full generated report remains part of the designed experience and is not yet implemented.
 
 > **Note:** Vitality Flow is an MVP developed during a hackathon. Some functionality and interface elements may continue to evolve.
+
+---
+
+## Product Experience
+
+<p align="center">
+  <img src="assets/main-focus.png" alt="Vitality Flow main focus screen" width="23%">
+  <img src="assets/daily-checkin.png" alt="Vitality Flow daily check-in screen" width="23%">
+  <img src="assets/progress.png" alt="Vitality Flow progress screen" width="23%">
+  <img src="assets/insights.png" alt="Vitality Flow insights screen" width="23%">
+</p>
+
+---
+
+## Designed Experience
+
+The broader Vitality Flow experience includes a Summary Report designed to bring tracked symptoms, lifestyle changes, progress, and observed patterns together in one place.
+
+The report experience has been designed in Figma but is not yet fully implemented in the current MVP.
+
+<p align="center">
+  <img src="assets/summary-report.svg" alt="Vitality Flow Summary Report — designed experience" width="35%">
+</p>
 
 ---
 
@@ -205,12 +229,6 @@ npm run preview
 🎥 **Video Demo:** Coming soon
 
 🌐 **Live Prototype:** Coming soon
-
----
-
-## Screenshots
-
-Final product screenshots will be added after the hackathon build is completed.
 
 ---
 

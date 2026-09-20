@@ -94,15 +94,6 @@ A Summary entry point is included in the prototype, while the full generated rep
 
 ---
 
-## Product Experience
-
-<p align="center">
-  <img
-    src="./assets/vitality-flow-thumbnail.png"
-    alt="Vitality Flow"
-    width="100%"
-  />
-</p>
 
 ## Product Preview
 
@@ -166,9 +157,16 @@ The broader Vitality Flow experience includes a Summary Report designed to bring
 The report experience has been designed in Figma but is not yet fully implemented in the current MVP.
 
 <p align="center">
-  <img src="assets/summary-report.svg" alt="Vitality Flow Summary Report — designed experience" width="35%">
+  <img
+    src="./assets/13%20%20Summary%20report.png"
+    alt="Vitality Flow summary report"
+    width="50%"
+  />
 </p>
 
+<p align="center">
+  A clear summary that users can bring to a healthcare appointment.
+</p>
 ---
 
 ## Responsible Design

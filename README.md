@@ -32,12 +32,6 @@ flowchart TB
     subgraph ROW1[" "]
         direction LR
         A["🌱 Journey"] --> B["💭 Symptoms"] --> C["🎯 Main focus"] --> D["✨ One change"] --> E["📝 Check-in"] --> F["📈 10 days"] --> G["💡 Patterns"] --> H["📋 Summary"]
-    end
-
-    D --> E
-
-    style ROW1 fill:transparent,stroke:transparent
-    style ROW2 fill:transparent,stroke:transparent
 ```
 
 ### 1. Understand your starting point

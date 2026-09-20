@@ -16,7 +16,7 @@
   - “Data stays on this device.”
 - Read and safely parse `vf.chosenChange` after mount. Show static placeholders during that local read, then render either the matching category control or the calm missing-data state with this verbatim copy:
   - Heading: “Hmm, we lost that.”
-  - Body: “Not you → us. Your choice didn't save properly. Let's go find it again.”
+  - Body: “Not you — us. Your choice didn't save properly. Let's go find it again.”
   - Button: “Go back”
 - Keep unfinished choices only in component state. No draft storage or intermediate keys.
 

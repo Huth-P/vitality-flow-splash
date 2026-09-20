@@ -182,7 +182,7 @@
     sans-serif;
 }
 
-@utility vf-focus-ring {
+.vf-focus-ring {
   outline: 3px solid var(--plum);
   outline-offset: 2px;
 }

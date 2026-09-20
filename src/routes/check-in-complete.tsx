@@ -146,7 +146,7 @@ function CheckInComplete() {
           <h1 className="mt-10 text-[30px] font-semibold leading-tight text-[#2A292F]">Check-in complete</h1>
           <p className="mt-3 max-w-[320px] text-[17px] leading-6 text-[#737080]">You've added today's experience to your personal pattern.</p>
           <p className="mt-10 rounded-full bg-cream px-6 py-2.5 text-[16px] font-semibold tracking-wide text-plum">DAY {streak}</p>
-          <h2 className="mt-10 text-[22px] font-semibold leading-7 text-[#2A292F]">Your month starts here</h2>
+          <h2 className="mt-10 text-[22px] font-semibold leading-7 text-[#2A292F]">Your journey starts here</h2>
           <p className="mt-4 max-w-[330px] text-[16px] leading-6 text-[#737080]">Keep checking in daily. The more consistent the record, the easier it may be to notice patterns.</p>
         </section>
 

@@ -26,6 +26,17 @@ Vitality Flow is designed for self-tracking and educational purposes. It does no
 
 ## How It Works
 
+```mermaid
+flowchart LR
+    A["🌱 Start<br/>Journey stage"] --> B["💭 Symptoms<br/>Choose up to 3"]
+    B --> C["🎯 Main Focus<br/>Choose 1"]
+    C --> D["✨ One Change<br/>Choose 1 habit"]
+    D --> E["📝 Daily Check-in<br/>Track symptoms"]
+    E --> F["📈 10 Days<br/>Observe trends"]
+    F --> G["💡 Insights<br/>Explore patterns"]
+    G --> H["📋 Summary<br/>Support conversations"]
+```
+
 ### 1. Understand your starting point
 
 During onboarding, users select:

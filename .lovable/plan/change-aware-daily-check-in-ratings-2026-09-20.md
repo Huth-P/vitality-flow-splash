@@ -1,28 +1,27 @@
-# Change-aware Daily Check-in ratings
+# Show only onboarding focus ratings
 
-## Update `/check-in`
-- Keep the existing app bar, en-GB date, heading and subtitle, notes field, save action, privacy footer, confirmation screen, dashboard handoff, and back navigation.
-- Add a soft plum summary pill below the heading that shows the chosen change as one readable line.
-- Read the requested nested `vf.profile.chosenChange` shape and fall back to the app’s current flat `vf.profile` shape, so existing profiles continue to work.
-- Format available details in order: label, amount/value with unit, frequency, then timing; omit missing parts cleanly.
+## Daily Check-in
+- Read `vf.profile.mainFocus` defensively and accept only an array containing one to three non-empty strings.
+- Match those strings exactly against the ten approved rating-scale symptom names.
+- Render only matched scales, preserving the array order from onboarding.
+- Keep the existing 0–5 controls, endpoint labels, plum selection and focus styling, chosen-change summary, notes, date handling, pre-fill, save confirmation, dashboard handoff, and local-only storage behaviour unchanged.
+- Limit pre-filled and newly saved ratings to the displayed focus symptoms so stale ratings for hidden symptoms are not carried into today’s saved entry.
 
-## Replace symptom selection with ratings
-- Replace the two-column checkbox grid and selection counter with ten stacked symptom groups.
-- Give every symptom its exact requested title and endpoint labels, with six radio choices numbered 0–5.
-- Make each choice a stable 44px target with a visible plum selected state and 3px plum keyboard focus ring.
-- Use accessible fieldsets, legends, radio names, and labels so each scale is independently keyboard-operable and announced correctly.
-- Keep the fixed 430 × 932 device presentation while allowing the long rating form to scroll naturally; keep the save area reachable without overlapping content.
+## Missing or invalid focus
+- If `mainFocus` is absent, malformed, empty, or contains no exact matches, render no rating scales.
+- Show calm inline copy explaining that the focus choices could not be found, plus a clear link back to Step 3.
+- Keep the page stable and error-free without falling back to all ten symptoms.
 
-## Local data and compatibility
-- Continue using `vf.today` and the date-keyed `vf.checkIns` object, preserving other saved dates when today is updated.
-- Save today as `{ date, ratings, notes }`, where `ratings` maps each symptom name to a number from 0–5.
-- Pre-fill valid ratings and notes when today already has a rating-based check-in.
-- Treat older check-ins containing the previous symptom array as unrated while preserving their notes; saving converts only today’s entry to the new rating format.
-- Keep storage failures inline and retryable, with no cookies, analytics, remote services, or network calls.
-- Require at least one rating before save, adapting the existing inline validation to the new controls while leaving the save button enabled.
+## Preserve Step 3 choices in completed profiles
+- The current setup stores Step 3 as `{ main_focus, tracked_alongside }` in `vf.onboarding.step3`, while later completion replaces `vf.profile` without those values.
+- When setup writes the completed profile, derive `mainFocus` in selection order from that saved Step 3 data and include it alongside the existing chosen-change details.
+- Make no visual or navigation changes to onboarding or change-detail screens.
 
 ## Verification
-- Test both nested and current flat profile shapes, including the full supplement example and profiles with fewer details.
-- Test all ten 0–5 scales, mouse/touch selection, arrow-key radio behaviour, visible focus, and immediate pre-fill after reopening today’s check-in.
-- Verify notes, date formatting, date-keyed merge, validation, storage failure handling, confirmation, and navigation.
-- Check the 430 × 932 and wider layouts, reduced-motion mode, build/runtime logs, console output, and confirm there are no external network requests.
+- Test profiles with one, two, and three exact `mainFocus` values; confirm only those scales render and in the stored order.
+- Test missing, malformed, empty, partially recognised, and fully unrecognised values; confirm invalid entries are omitted and the calm fallback appears when none remain.
+- Verify rating selection, keyboard controls, focus rings, existing-rating pre-fill, notes, date-keyed merging, validation, storage failure handling, confirmation, and navigation remain unchanged.
+- Confirm the 430×932 and wider layouts, reduced-motion behaviour, successful build, no console errors, and no external requests.
+
+## Implementation note
+- The current checked-in `/check-in` source has reverted to the earlier checkbox version, while the established ratings implementation is available in project history. Restore that existing ratings behaviour first, then apply the focused filtering above without redesigning the screen.

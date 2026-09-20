@@ -17,6 +17,11 @@ import { Route as OnboardingStep3RouteImport } from './routes/onboarding-step-3'
 import { Route as OnboardingStep4RouteImport } from './routes/onboarding-step-4'
 import { Route as TransitionRouteImport } from './routes/transition'
 import { Route as WelcomeRouteImport } from './routes/welcome'
+import { Route as ChangeDetailsIndexRouteImport } from './routes/change-details.index'
+import { Route as ChangeDetailsDietaryChangesRouteImport } from './routes/change-details.dietary-changes'
+import { Route as ChangeDetailsPhysicalActivityRouteImport } from './routes/change-details.physical-activity'
+import { Route as ChangeDetailsSleepRoutineRouteImport } from './routes/change-details.sleep-routine'
+import { Route as ChangeDetailsSupplementsRouteImport } from './routes/change-details.supplements'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -58,37 +63,80 @@ const WelcomeRoute = WelcomeRouteImport.update({
   path: '/welcome',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ChangeDetailsIndexRoute = ChangeDetailsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => ChangeDetailsRoute,
+} as any)
+const ChangeDetailsDietaryChangesRoute =
+  ChangeDetailsDietaryChangesRouteImport.update({
+    id: '/dietary-changes',
+    path: '/dietary-changes',
+    getParentRoute: () => ChangeDetailsRoute,
+  } as any)
+const ChangeDetailsPhysicalActivityRoute =
+  ChangeDetailsPhysicalActivityRouteImport.update({
+    id: '/physical-activity',
+    path: '/physical-activity',
+    getParentRoute: () => ChangeDetailsRoute,
+  } as any)
+const ChangeDetailsSleepRoutineRoute =
+  ChangeDetailsSleepRoutineRouteImport.update({
+    id: '/sleep-routine',
+    path: '/sleep-routine',
+    getParentRoute: () => ChangeDetailsRoute,
+  } as any)
+const ChangeDetailsSupplementsRoute =
+  ChangeDetailsSupplementsRouteImport.update({
+    id: '/supplements',
+    path: '/supplements',
+    getParentRoute: () => ChangeDetailsRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
-  '/change-details': typeof ChangeDetailsRoute
+  '/change-details': typeof ChangeDetailsRouteWithChildren
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
+  '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
+  '/change-details/physical-activity': typeof ChangeDetailsPhysicalActivityRoute
+  '/change-details/sleep-routine': typeof ChangeDetailsSleepRoutineRoute
+  '/change-details/supplements': typeof ChangeDetailsSupplementsRoute
+  '/change-details/': typeof ChangeDetailsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
-  '/change-details': typeof ChangeDetailsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
+  '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
+  '/change-details/physical-activity': typeof ChangeDetailsPhysicalActivityRoute
+  '/change-details/sleep-routine': typeof ChangeDetailsSleepRoutineRoute
+  '/change-details/supplements': typeof ChangeDetailsSupplementsRoute
+  '/change-details': typeof ChangeDetailsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
-  '/change-details': typeof ChangeDetailsRoute
+  '/change-details': typeof ChangeDetailsRouteWithChildren
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
+  '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
+  '/change-details/physical-activity': typeof ChangeDetailsPhysicalActivityRoute
+  '/change-details/sleep-routine': typeof ChangeDetailsSleepRoutineRoute
+  '/change-details/supplements': typeof ChangeDetailsSupplementsRoute
+  '/change-details/': typeof ChangeDetailsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -101,16 +149,25 @@ export interface FileRouteTypes {
     | '/onboarding-step-4'
     | '/transition'
     | '/welcome'
+    | '/change-details/dietary-changes'
+    | '/change-details/physical-activity'
+    | '/change-details/sleep-routine'
+    | '/change-details/supplements'
+    | '/change-details/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/age-range'
-    | '/change-details'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
     | '/transition'
     | '/welcome'
+    | '/change-details/dietary-changes'
+    | '/change-details/physical-activity'
+    | '/change-details/sleep-routine'
+    | '/change-details/supplements'
+    | '/change-details'
   id:
     | '__root__'
     | '/'
@@ -121,12 +178,17 @@ export interface FileRouteTypes {
     | '/onboarding-step-4'
     | '/transition'
     | '/welcome'
+    | '/change-details/dietary-changes'
+    | '/change-details/physical-activity'
+    | '/change-details/sleep-routine'
+    | '/change-details/supplements'
+    | '/change-details/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AgeRangeRoute: typeof AgeRangeRoute
-  ChangeDetailsRoute: typeof ChangeDetailsRoute
+  ChangeDetailsRoute: typeof ChangeDetailsRouteWithChildren
   JourneyStageRoute: typeof JourneyStageRoute
   OnboardingStep3Route: typeof OnboardingStep3Route
   OnboardingStep4Route: typeof OnboardingStep4Route
@@ -192,13 +254,68 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof WelcomeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/change-details/': {
+      id: '/change-details/'
+      path: '/'
+      fullPath: '/change-details/'
+      preLoaderRoute: typeof ChangeDetailsIndexRouteImport
+      parentRoute: typeof ChangeDetailsRoute
+    }
+    '/change-details/dietary-changes': {
+      id: '/change-details/dietary-changes'
+      path: '/dietary-changes'
+      fullPath: '/change-details/dietary-changes'
+      preLoaderRoute: typeof ChangeDetailsDietaryChangesRouteImport
+      parentRoute: typeof ChangeDetailsRoute
+    }
+    '/change-details/physical-activity': {
+      id: '/change-details/physical-activity'
+      path: '/physical-activity'
+      fullPath: '/change-details/physical-activity'
+      preLoaderRoute: typeof ChangeDetailsPhysicalActivityRouteImport
+      parentRoute: typeof ChangeDetailsRoute
+    }
+    '/change-details/sleep-routine': {
+      id: '/change-details/sleep-routine'
+      path: '/sleep-routine'
+      fullPath: '/change-details/sleep-routine'
+      preLoaderRoute: typeof ChangeDetailsSleepRoutineRouteImport
+      parentRoute: typeof ChangeDetailsRoute
+    }
+    '/change-details/supplements': {
+      id: '/change-details/supplements'
+      path: '/supplements'
+      fullPath: '/change-details/supplements'
+      preLoaderRoute: typeof ChangeDetailsSupplementsRouteImport
+      parentRoute: typeof ChangeDetailsRoute
+    }
   }
 }
+
+interface ChangeDetailsRouteChildren {
+  ChangeDetailsDietaryChangesRoute: typeof ChangeDetailsDietaryChangesRoute
+  ChangeDetailsPhysicalActivityRoute: typeof ChangeDetailsPhysicalActivityRoute
+  ChangeDetailsSleepRoutineRoute: typeof ChangeDetailsSleepRoutineRoute
+  ChangeDetailsSupplementsRoute: typeof ChangeDetailsSupplementsRoute
+  ChangeDetailsIndexRoute: typeof ChangeDetailsIndexRoute
+}
+
+const ChangeDetailsRouteChildren: ChangeDetailsRouteChildren = {
+  ChangeDetailsDietaryChangesRoute: ChangeDetailsDietaryChangesRoute,
+  ChangeDetailsPhysicalActivityRoute: ChangeDetailsPhysicalActivityRoute,
+  ChangeDetailsSleepRoutineRoute: ChangeDetailsSleepRoutineRoute,
+  ChangeDetailsSupplementsRoute: ChangeDetailsSupplementsRoute,
+  ChangeDetailsIndexRoute: ChangeDetailsIndexRoute,
+}
+
+const ChangeDetailsRouteWithChildren = ChangeDetailsRoute._addFileChildren(
+  ChangeDetailsRouteChildren,
+)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AgeRangeRoute: AgeRangeRoute,
-  ChangeDetailsRoute: ChangeDetailsRoute,
+  ChangeDetailsRoute: ChangeDetailsRouteWithChildren,
   JourneyStageRoute: JourneyStageRoute,
   OnboardingStep3Route: OnboardingStep3Route,
   OnboardingStep4Route: OnboardingStep4Route,

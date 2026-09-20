@@ -69,6 +69,9 @@
   --color-vf-disc-apricot: var(--vf-disc-apricot);
   --color-vf-disc-teal: var(--vf-disc-teal);
   --color-vf-disc-lilac: var(--vf-disc-lilac);
+  --color-vf-soft-surface: var(--vf-soft-surface);
+  --color-vf-soft-border: var(--vf-soft-border);
+  --color-vf-on-plum: var(--vf-on-plum);
 }
 
 :root {
@@ -83,6 +86,9 @@
   --vf-disc-apricot: #f3b57d;
   --vf-disc-teal: #318b84;
   --vf-disc-lilac: #987caf;
+  --vf-soft-surface: #fffefc;
+  --vf-soft-border: #ddd8dd;
+  --vf-on-plum: #ffffff;
   --background: oklch(1 0 0);
   --foreground: oklch(0.129 0.042 264.695);
   --card: oklch(1 0 0);

@@ -3,6 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronLeft, Droplets, Flower2, Footprints, Moon, Pill, Utensils } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { CHANGE_CATEGORY_ROUTES, type IntermediateCategory } from "@/components/change-details/category-options";
 
 type CategoryOption = {
   label: string;
@@ -65,6 +66,14 @@ function ChangeCategory() {
                 JSON.stringify({ category: selected, label: "", unit: "" }),
               );
               setSaveMessage("");
+              if (selected in CHANGE_CATEGORY_ROUTES) {
+                const destination = CHANGE_CATEGORY_ROUTES[selected as IntermediateCategory];
+                if (destination === "/change-details/supplements") navigate({ to: "/change-details/supplements" });
+                if (destination === "/change-details/physical-activity") navigate({ to: "/change-details/physical-activity" });
+                if (destination === "/change-details/sleep-routine") navigate({ to: "/change-details/sleep-routine" });
+                if (destination === "/change-details/dietary-changes") navigate({ to: "/change-details/dietary-changes" });
+                return;
+              }
               navigate({ to: "/change-details" });
             } catch {
               setSaveMessage("We couldn't save your answer right now — please try again.");

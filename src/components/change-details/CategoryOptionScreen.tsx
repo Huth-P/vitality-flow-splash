@@ -3,6 +3,7 @@ import { Link, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { readMainFocus } from "@/lib/main-focus";
 import {
   CHANGE_CATEGORY_NOUNS,
   CHANGE_CATEGORY_OPTIONS,
@@ -49,7 +50,10 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
 
       const completedChoice = { category, label };
       window.localStorage.setItem("vf.chosenChange", JSON.stringify(completedChoice));
-      window.localStorage.setItem("vf.profile", JSON.stringify(completedChoice));
+      window.localStorage.setItem(
+        "vf.profile",
+        JSON.stringify({ ...completedChoice, mainFocus: readMainFocus() }),
+      );
       navigate({ to: "/transition" });
     } catch {
       setMessage("We couldn't save your answer right now — please try again.");

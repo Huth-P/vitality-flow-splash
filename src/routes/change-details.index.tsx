@@ -3,6 +3,7 @@ import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { ChevronDown, ChevronLeft, Minus, Plus } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { readMainFocus } from "@/lib/main-focus";
 
 type ChosenChange = { category: string; label: string; unit?: string };
 type SupplementFields = { amount: string; frequency: string; when: string };
@@ -74,9 +75,10 @@ function ChangeDetails() {
       return;
     }
     try {
+      const mainFocus = readMainFocus();
       const profile = isStepper
-        ? { ...chosen, label: chosen.category, unit, value: stepValue }
-        : { ...chosen, amount, frequency: fields.frequency, when: fields.when };
+        ? { ...chosen, label: chosen.category, unit, value: stepValue, mainFocus }
+        : { ...chosen, amount, frequency: fields.frequency, when: fields.when, mainFocus };
       window.localStorage.setItem("vf.profile", JSON.stringify(profile));
       setMessage("");
       navigate({ to: "/transition" });

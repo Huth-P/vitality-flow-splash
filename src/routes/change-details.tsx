@@ -120,7 +120,7 @@ function ChangeDetails() {
     const resolvedLabel = isStepper
       ? chosen.category
       : selection === "Other"
-        ? otherDraft.trim()
+        ? otherValue.trim() || otherDraft.trim()
         : selection;
     if (!resolvedLabel) {
       setMessage("Add a value to finish setup");
@@ -245,6 +245,16 @@ function DropdownRow({ category, options, selection, otherDraft, onSelectionChan
     <div className="relative min-h-[72px] rounded-[8px] border border-[#D5D0D5] bg-white px-4 py-3 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum">
       <label htmlFor={selectId} className="block text-[11px] font-medium text-[#5E5B66]">{category}</label>
       <div className="mt-1 flex min-h-11 items-center gap-3">
+        <select
+          id={selectId}
+          value={selection}
+          onChange={(event) => onSelectionChange(event.target.value)}
+          className={selection === "Other" ? "absolute bottom-3 right-4 size-11 cursor-pointer opacity-0" : "absolute inset-0 cursor-pointer opacity-0"}
+          aria-label={`${category} option`}
+        >
+          <option value="">Choose an option</option>
+          {options.map((option) => <option key={option} value={option}>{option}</option>)}
+        </select>
         <div className="flex min-w-0 flex-1 items-center gap-2">
           <span className={`min-w-0 truncate text-[15px] ${selection ? "font-semibold text-[#2A292F]" : "text-[#737080]"}`}>
             {selection || "Choose an option"}
@@ -266,16 +276,6 @@ function DropdownRow({ category, options, selection, otherDraft, onSelectionChan
           ) : null}
         </div>
         <span className="flex size-11 shrink-0 items-center justify-center" aria-hidden="true"><ChevronDown className="size-5 text-plum" /></span>
-        <select
-          id={selectId}
-          value={selection}
-          onChange={(event) => onSelectionChange(event.target.value)}
-          className={selection === "Other" ? "absolute bottom-3 right-4 size-11 cursor-pointer opacity-0" : "absolute inset-0 cursor-pointer opacity-0"}
-          aria-label={`${category} option`}
-        >
-          <option value="">Choose an option</option>
-          {options.map((option) => <option key={option} value={option}>{option}</option>)}
-        </select>
       </div>
     </div>
   );

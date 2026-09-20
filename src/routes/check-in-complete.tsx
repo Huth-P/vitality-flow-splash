@@ -38,7 +38,10 @@ function parseCheckInKeys(value: string | null): string[] {
 }
 
 function shiftDateKey(dateKey: string, offsetDays: number) {
-  const [year, month, day] = dateKey.split("-").map(Number);
+  const parts = dateKey.split("-").map(Number);
+  const year = parts[0] ?? 1970;
+  const month = parts[1] ?? 1;
+  const day = parts[2] ?? 1;
   const date = new Date(year, month - 1, day + offsetDays);
   const y = date.getFullYear();
   const m = String(date.getMonth() + 1).padStart(2, "0");

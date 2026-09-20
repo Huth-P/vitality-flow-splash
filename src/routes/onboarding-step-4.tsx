@@ -106,6 +106,10 @@ function ChangeCategory() {
                       name="change-category"
                       value={label}
                       checked={checked}
+                      onChange={() => {
+                        setSelected(label);
+                        setSaveMessage("");
+                      }}
                       onClick={() => {
                         setSelected(label);
                         setSaveMessage("");

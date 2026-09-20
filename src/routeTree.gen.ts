@@ -20,6 +20,7 @@ import { Route as JourneyStageRouteImport } from './routes/journey-stage'
 import { Route as OnboardingStep3RouteImport } from './routes/onboarding-step-3'
 import { Route as OnboardingStep4RouteImport } from './routes/onboarding-step-4'
 import { Route as ProgressRouteImport } from './routes/progress'
+import { Route as SummaryRouteImport } from './routes/summary'
 import { Route as TransitionRouteImport } from './routes/transition'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as ChangeDetailsIndexRouteImport } from './routes/change-details.index'
@@ -83,6 +84,11 @@ const ProgressRoute = ProgressRouteImport.update({
   path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SummaryRoute = SummaryRouteImport.update({
+  id: '/summary',
+  path: '/summary',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TransitionRoute = TransitionRouteImport.update({
   id: '/transition',
   path: '/transition',
@@ -135,6 +141,7 @@ export interface FileRoutesByFullPath {
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
   '/progress': typeof ProgressRoute
+  '/summary': typeof SummaryRoute
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
   '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
@@ -154,6 +161,7 @@ export interface FileRoutesByTo {
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
   '/progress': typeof ProgressRoute
+  '/summary': typeof SummaryRoute
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
   '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
@@ -175,6 +183,7 @@ export interface FileRoutesById {
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
   '/progress': typeof ProgressRoute
+  '/summary': typeof SummaryRoute
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
   '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
@@ -197,6 +206,7 @@ export interface FileRouteTypes {
     | '/onboarding-step-3'
     | '/onboarding-step-4'
     | '/progress'
+    | '/summary'
     | '/transition'
     | '/welcome'
     | '/change-details/dietary-changes'
@@ -216,6 +226,7 @@ export interface FileRouteTypes {
     | '/onboarding-step-3'
     | '/onboarding-step-4'
     | '/progress'
+    | '/summary'
     | '/transition'
     | '/welcome'
     | '/change-details/dietary-changes'
@@ -236,6 +247,7 @@ export interface FileRouteTypes {
     | '/onboarding-step-3'
     | '/onboarding-step-4'
     | '/progress'
+    | '/summary'
     | '/transition'
     | '/welcome'
     | '/change-details/dietary-changes'
@@ -257,6 +269,7 @@ export interface RootRouteChildren {
   OnboardingStep3Route: typeof OnboardingStep3Route
   OnboardingStep4Route: typeof OnboardingStep4Route
   ProgressRoute: typeof ProgressRoute
+  SummaryRoute: typeof SummaryRoute
   TransitionRoute: typeof TransitionRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -338,6 +351,13 @@ declare module '@tanstack/react-router' {
       path: '/progress'
       fullPath: '/progress'
       preLoaderRoute: typeof ProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/summary': {
+      id: '/summary'
+      path: '/summary'
+      fullPath: '/summary'
+      preLoaderRoute: typeof SummaryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/transition': {
@@ -424,6 +444,7 @@ const rootRouteChildren: RootRouteChildren = {
   OnboardingStep3Route: OnboardingStep3Route,
   OnboardingStep4Route: OnboardingStep4Route,
   ProgressRoute: ProgressRoute,
+  SummaryRoute: SummaryRoute,
   TransitionRoute: TransitionRoute,
   WelcomeRoute: WelcomeRoute,
 }

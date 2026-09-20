@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { Check, ChevronLeft, Droplets, Flower2, Footprints, Moon, Pill, Utensils } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -35,27 +35,9 @@ export const Route = createFileRoute("/onboarding-step-4")({
 });
 
 function ChangeCategory() {
+  const navigate = useNavigate({ from: "/onboarding-step-4" });
   const [selected, setSelected] = useState("");
   const [saveMessage, setSaveMessage] = useState("");
-  const [saved, setSaved] = useState(false);
-
-  if (saved) {
-    return (
-      <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-white p-0 sm:p-6">
-        <main className="relative flex h-dvh max-h-[932px] w-full max-w-[430px] flex-col items-center justify-center rounded-none bg-white text-[#2A292F] sm:h-[932px] sm:rounded-[32px]">
-          <p className="text-[12px] text-[#737080]">Step 4 of 4 — saved</p>
-          <h1 className="mt-2 text-2xl font-semibold">Saved.</h1>
-          <p className="mt-2 text-[13px] text-[#737080]">The next screen is coming next.</p>
-          <Link
-            to="/onboarding-step-3"
-            className="mt-6 inline-flex min-h-11 items-center text-plum underline decoration-2 underline-offset-4 outline-none focus-visible:ring-[3px] focus-visible:ring-plum"
-          >
-            Back to main focus
-          </Link>
-        </main>
-      </div>
-    );
-  }
 
   return (
     <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-plum-deep p-0 sm:p-6">
@@ -78,9 +60,12 @@ function ChangeCategory() {
             event.preventDefault();
             if (!selected) return;
             try {
-              window.localStorage.setItem("vf.onboarding.step4a", JSON.stringify({ change_category: selected }));
+              window.localStorage.setItem(
+                "vf.chosenChange",
+                JSON.stringify({ category: selected, label: "", unit: "" }),
+              );
               setSaveMessage("");
-              setSaved(true);
+              navigate({ to: "/change-details" });
             } catch {
               setSaveMessage("We couldn't save your answer right now — please try again.");
             }

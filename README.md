@@ -97,11 +97,65 @@ A Summary entry point is included in the prototype, while the full generated rep
 ## Product Experience
 
 <p align="center">
-  <img src="assets/main-focus.png" alt="Vitality Flow main focus screen" width="23%">
-  <img src="assets/daily-checkin.png" alt="Vitality Flow daily check-in screen" width="23%">
-  <img src="assets/progress.png" alt="Vitality Flow progress screen" width="23%">
-  <img src="assets/insights.png" alt="Vitality Flow insights screen" width="23%">
+  <img
+    src="./assets/vitality-flow-thumbnail.png"
+    alt="Vitality Flow"
+    width="100%"
+  />
 </p>
+
+## Product Preview
+
+<table>
+  <tr>
+    <td width="50%" align="center">
+      <img
+        src="./assets/Vitality%20Flow%20main%20focus%20screen.png"
+        alt="Main focus selection"
+        width="100%"
+      />
+      <br />
+      <strong>Main Focus</strong>
+      <br />
+      Select up to three symptoms and choose one primary focus.
+    </td>
+    <td width="50%" align="center">
+      <img
+        src="./assets/Vitality%20Flow%20daily%20check-in%20screen.png"
+        alt="Daily check-in"
+        width="100%"
+      />
+      <br />
+      <strong>Daily Check-In</strong>
+      <br />
+      Record how you feel in a quick daily check-in.
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" align="center">
+      <img
+        src="./assets/Vitality%20Flow%20progress%20screen.png"
+        alt="Progress tracking"
+        width="100%"
+      />
+      <br />
+      <strong>Progress</strong>
+      <br />
+      Follow changes and possible patterns over time.
+    </td>
+    <td width="50%" align="center">
+      <img
+        src="./assets/Vitality%20Flow%20insights%20screen.png"
+        alt="Personal insights"
+        width="100%"
+      />
+      <br />
+      <strong>Insights</strong>
+      <br />
+      Review educational observations based on your records.
+    </td>
+  </tr>
+</table>
 
 ---
 

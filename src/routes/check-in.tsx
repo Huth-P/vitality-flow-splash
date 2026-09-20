@@ -130,10 +130,35 @@ function formatChosenChange(change: ChosenChange | null) {
   return details.join(" · ");
 }
 
-function getStoredRatings(checkIn: CheckIn | undefined): Ratings {
+type SymptomScale = (typeof SYMPTOM_SCALES)[number];
+
+function parseProfile(value: string | null): Record<string, unknown> | null {
+  if (!value) return null;
+  const parsed: unknown = JSON.parse(value);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  return parsed as Record<string, unknown>;
+}
+
+function getFocusScales(profile: Record<string, unknown> | null): SymptomScale[] {
+  const raw = profile?.["mainFocus"];
+  if (!Array.isArray(raw)) return [];
+  const seen = new Set<string>();
+  const scales: SymptomScale[] = [];
+  for (const entry of raw) {
+    if (typeof entry !== "string") continue;
+    const match = SYMPTOM_SCALES.find((scale) => scale.name === entry);
+    if (!match || seen.has(match.name)) continue;
+    seen.add(match.name);
+    scales.push(match);
+    if (scales.length === 3) break;
+  }
+  return scales;
+}
+
+function getStoredRatings(checkIn: CheckIn | undefined, scales: readonly SymptomScale[]): Ratings {
   if (!checkIn?.ratings || typeof checkIn.ratings !== "object" || Array.isArray(checkIn.ratings)) return {};
   return Object.fromEntries(
-    SYMPTOM_SCALES.flatMap(({ name }) => {
+    scales.flatMap(({ name }) => {
       const value = checkIn.ratings?.[name];
       return typeof value === "number" && Number.isInteger(value) && value >= 0 && value <= 5 ? [[name, value]] : [];
     }),
@@ -144,6 +169,7 @@ function DailyCheckIn() {
   const navigate = useNavigate({ from: "/check-in" });
   const [dateKey, setDateKey] = useState("");
   const [ratings, setRatings] = useState<Ratings>({});
+  const [focusScales, setFocusScales] = useState<SymptomScale[]>([]);
   const [chosenChange, setChosenChange] = useState("");
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("");
@@ -157,11 +183,14 @@ function DailyCheckIn() {
       window.localStorage.setItem("vf.today", today);
       const checkIns = parseCheckIns(window.localStorage.getItem("vf.checkIns"));
       const existing = checkIns[today];
-      const profile = parseChosenChange(window.localStorage.getItem("vf.profile"));
+      const storedProfile = window.localStorage.getItem("vf.profile");
+      const profile = parseProfile(storedProfile);
+      const scales = getFocusScales(profile);
       setDateKey(today);
-      setChosenChange(formatChosenChange(profile));
+      setFocusScales(scales);
+      setChosenChange(formatChosenChange(parseChosenChange(storedProfile)));
       if (existing) {
-        setRatings(getStoredRatings(existing));
+        setRatings(getStoredRatings(existing, scales));
         setNotes(typeof existing.notes === "string" ? existing.notes : "");
       }
     } catch {
@@ -190,7 +219,10 @@ function DailyCheckIn() {
       } catch {
         checkIns = {};
       }
-      checkIns[resolvedDate] = { date: resolvedDate, ratings, notes };
+      const focusedRatings = Object.fromEntries(
+        focusScales.flatMap(({ name }) => (typeof ratings[name] === "number" ? [[name, ratings[name]]] : [])),
+      ) as Ratings;
+      checkIns[resolvedDate] = { date: resolvedDate, ratings: focusedRatings, notes };
       window.localStorage.setItem("vf.today", resolvedDate);
       window.localStorage.setItem("vf.checkIns", JSON.stringify(checkIns));
       setDateKey(resolvedDate);
@@ -237,10 +269,21 @@ function DailyCheckIn() {
 
         {chosenChange ? <p className="mt-4 w-fit max-w-full rounded-full bg-vf-lavender px-4 py-2 text-[13px] font-semibold leading-5 text-plum">{chosenChange}</p> : null}
 
+        {focusScales.length === 0 ? (
+          <section className="mt-7 rounded-[12px] border border-vf-soft-border bg-vf-soft-surface p-4">
+            <h2 className="text-[16px] font-semibold">We couldn't find your chosen symptoms.</h2>
+            <p className="mt-2 text-[14px] leading-5 text-[#5E5B66]">
+              Your main focus choices aren't saved on this device yet, so there's nothing to rate today. Pick them again and come straight back.
+            </p>
+            <Button asChild className="mt-4 min-h-11 rounded-[12px] bg-plum px-5 text-[14px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">
+              <Link to="/onboarding-step-3">Choose your symptoms</Link>
+            </Button>
+          </section>
+        ) : (
         <section className="mt-7" aria-labelledby="ratings-heading">
           <h2 id="ratings-heading" className="text-[16px] font-semibold">Symptoms</h2>
           <div className="mt-3 space-y-5">
-            {SYMPTOM_SCALES.map((symptom) => (
+            {focusScales.map((symptom) => (
               <fieldset key={symptom.name} className="rounded-[8px] border border-vf-soft-border bg-vf-soft-surface px-3 pb-3 pt-2">
                 <legend className="px-1 text-[14px] font-semibold leading-5">{symptom.name}</legend>
                 <div className="mt-1 grid grid-cols-6 gap-1" aria-label={`${symptom.name} rating from 0 to 5`}>
@@ -263,6 +306,7 @@ function DailyCheckIn() {
             ))}
           </div>
         </section>
+        )}
 
         <div className="mt-7">
           <label htmlFor="check-in-notes" className="block text-[16px] font-semibold">Anything else to note?</label>

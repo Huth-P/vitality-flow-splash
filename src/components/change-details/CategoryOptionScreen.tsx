@@ -83,9 +83,26 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
                 const checked = selection === option;
                 const inputId = `${from.replaceAll("/", "-")}-${option.toLowerCase().replaceAll(" ", "-")}`;
                 return (
-                  <div key={option} className={`relative flex min-h-11 items-center rounded-[10.5px] border bg-vf-soft-surface px-4 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-vf-disc-lilac" : "border-vf-soft-border"}`}>
+                  <label
+                    key={option}
+                    htmlFor={inputId}
+                    className={`relative flex min-h-11 cursor-pointer items-center rounded-[10.5px] border bg-vf-soft-surface px-4 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-vf-disc-lilac" : "border-vf-soft-border"}`}
+                  >
+                    <input
+                      id={inputId}
+                      type="radio"
+                      name="category-option"
+                      value={option}
+                      checked={checked}
+                      onChange={() => {
+                        setSelection(option);
+                        if (option !== "Other") setOtherDraft("");
+                        setMessage("");
+                      }}
+                      className="absolute left-4 top-1/2 size-px -translate-y-1/2 opacity-0"
+                    />
                     <span className="flex min-w-0 flex-1 items-center gap-2">
-                      <label htmlFor={inputId} className="min-w-0 shrink cursor-pointer text-[16px] font-semibold leading-5">{option}</label>
+                      <span className="min-w-0 shrink text-[16px] font-semibold leading-5">{option}</span>
                       {checked && option === "Other" ? (
                         <span className="flex min-w-0 flex-1 items-end gap-1">
                           <label htmlFor={`${inputId}-text`} className="sr-only">Enter the {CHANGE_CATEGORY_NOUNS[category]} name</label>
@@ -107,20 +124,7 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
                     <span className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border ${checked ? "border-vf-disc-lilac bg-vf-disc-lilac" : "border-[#B8B3BD] bg-background"}`} aria-hidden="true">
                       {checked ? <Check className="size-3 text-vf-on-plum" strokeWidth={3} /> : null}
                     </span>
-                    <input
-                      id={inputId}
-                      type="radio"
-                      name="category-option"
-                      value={option}
-                      checked={checked}
-                      onChange={() => {
-                        setSelection(option);
-                        if (option !== "Other") setOtherDraft("");
-                        setMessage("");
-                      }}
-                      className="sr-only left-4 top-1/2"
-                    />
-                  </div>
+                  </label>
                 );
               })}
             </div>

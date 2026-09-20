@@ -28,19 +28,35 @@ Vitality Flow is designed for self-tracking and educational purposes. It does no
 
 ```mermaid
 flowchart TB
-    subgraph A["Set your focus"]
+    A["🌱 Journey"] --> B["💭 Symptoms"]
+    B --> C["🎯 Main focus"]
+    C --> D["✨ One change"]
+
+    D --> E["📝 Check-in"]
+
+    E --> F["📈 10 days"]
+    F --> G["💡 Patterns"]
+    G --> H["📋 Summary"]
+
+    subgraph row1[" "]
         direction LR
-        A1["🌱 Journey"] --> A2["💭 Symptoms"] --> A3["🎯 Main focus"] --> A4["✨ One change"]
+        A
+        B
+        C
+        D
     end
 
-    subgraph B["Track & understand"]
-        direction LR
-        B1["📝 Check in"] --> B2["📈 10 days"] --> B3["💡 Patterns"] --> B4["📋 Summary"]
+    subgraph row2[" "]
+        direction RL
+        E
+        F
+        G
+        H
     end
 
-    A4 --> B1
+    style row1 fill:none,stroke:none
+    style row2 fill:none,stroke:none
 ```
-
 ### 1. Understand your starting point
 
 During onboarding, users select:

@@ -185,7 +185,7 @@ function DailyCheckIn() {
             {SYMPTOM_OPTIONS.map((symptom) => {
               const checked = symptoms.includes(symptom);
               return (
-                <label key={symptom} className={`flex h-12 cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[12px] leading-[1.15] outline-none ${focusedSymptom === symptom ? "outline-[3px] outline-solid outline-plum outline-offset-2" : ""} ${checked ? "border-plum bg-plum text-vf-on-plum" : "border-vf-soft-border bg-vf-soft-surface text-[#2A292F]"}`}>
+                <label key={symptom} className={`flex h-12 cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[12px] leading-[1.15] outline-none ${focusedSymptom === symptom ? "vf-focus-ring" : ""} ${checked ? "border-plum bg-plum text-vf-on-plum" : "border-vf-soft-border bg-vf-soft-surface text-[#2A292F]"}`}>
                   <input type="checkbox" name="symptoms" value={symptom} checked={checked} onChange={() => toggleSymptom(symptom)} onFocus={() => setFocusedSymptom(symptom)} onBlur={() => setFocusedSymptom(null)} className="sr-only" />
                   <span className="min-w-0 flex-1">{symptom}</span>
                   <span aria-hidden="true" className={`size-4 shrink-0 rounded-full border ${checked ? "border-vf-on-plum bg-vf-on-plum" : "border-[#737080]"}`} />

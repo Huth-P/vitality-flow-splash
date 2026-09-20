@@ -27,14 +27,18 @@ Vitality Flow is designed for self-tracking and educational purposes. It does no
 ## How It Works
 
 ```mermaid
-flowchart TD
-    A["🌱 Start your journey"] --> B["💭 Choose up to 3 symptoms"]
-    B --> C["🎯 Select your main focus"]
-    C --> D["✨ Choose one lifestyle change"]
-    D --> E["📝 Daily check-ins"]
-    E --> F["📈 Track for 10 days"]
-    F --> G["💡 Explore trends & patterns"]
-    G --> H["📋 Build your personal summary"]
+flowchart TB
+    subgraph A["Set your focus"]
+        direction LR
+        A1["🌱 Journey"] --> A2["💭 Symptoms"] --> A3["🎯 Main focus"] --> A4["✨ One change"]
+    end
+
+    subgraph B["Track & understand"]
+        direction LR
+        B1["📝 Check in"] --> B2["📈 10 days"] --> B3["💡 Patterns"] --> B4["📋 Summary"]
+    end
+
+    A4 --> B1
 ```
 
 ### 1. Understand your starting point

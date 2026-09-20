@@ -21,6 +21,7 @@ Replace the current `/progress` placeholder with the real Progress screen, and a
 - The insight sentence adapts to your data — improving, steady, or more difficult — over the number of days actually charted.
 - Fully static: no animation, nothing to hover, reduced-motion safe.
 - No network calls, no cookies, no analytics; everything stays on the device, dates in en-GB.
+- **Insight sentence:** The trend insight (e.g., "gradually improved", "remained steady", "more difficult") adapts based on a comparison of the first and last ratings in the chart period — if the last 2–3 entries are higher than the first 2–3, say "improved"; if lower, say "more difficult"; if within 1 point, say "remained steady". Never include medical language ("your magnesium levels") or recommendations ("try sleeping earlier").
 
 ## Technical notes
 

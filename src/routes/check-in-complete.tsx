@@ -75,7 +75,7 @@ function makeConfetti(): ConfettiPiece[] {
     id,
     left: 4 + Math.random() * 92,
     size: 6 + Math.random() * 6,
-    color: CONFETTI_COLORS[id % CONFETTI_COLORS.length],
+    color: CONFETTI_COLORS[id % CONFETTI_COLORS.length] ?? "#4A2B4E",
     round: id % 2 === 0,
     delay: Math.random() * 0.2,
   }));
@@ -112,6 +112,7 @@ function CheckInComplete() {
       const timer = window.setTimeout(() => setConfetti([]), 1600);
       return () => window.clearTimeout(timer);
     }
+    return undefined;
   }, []);
 
   return (

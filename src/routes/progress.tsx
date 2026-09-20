@@ -23,7 +23,7 @@ function parseEntries(raw: string | null): Entry[] {
         const maybe = (value as { ratings?: unknown }).ratings;
         if (maybe && typeof maybe === "object" && !Array.isArray(maybe)) {
           for (const [symptom, rating] of Object.entries(maybe as Record<string, unknown>)) {
-            if (typeof rating === "number" && Number.isInteger(rating) && rating >= 0 && rating <= 5) {
+            if (typeof rating === "number" && Number.isFinite(rating) && rating >= 0 && rating <= 5) {
               ratings[symptom] = rating;
             }
           }
@@ -62,10 +62,10 @@ function describeTrend(points: Point[], symptom: string): string {
   const end = averageOf(points.slice(-window).map((point) => point.value));
   const label = symptom.toLowerCase();
   const days = points.length;
-  if (end <= start - 1) {
+  if (end <= start - 0.5) {
     return `Your ${label} ratings have gradually improved over the last ${days} days.`;
   }
-  if (end >= start + 1) {
+  if (end >= start + 0.5) {
     return `Your ${label} ratings have gradually become more difficult over the last ${days} days.`;
   }
   return `Your ${label} ratings have remained steady over the last ${days} days.`;

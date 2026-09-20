@@ -117,7 +117,11 @@ function ChangeDetails() {
     event.preventDefault();
     if (!chosen) return;
 
-    const resolvedLabel = isStepper ? chosen.category : selection === "Other" ? otherValue.trim() : selection;
+    const resolvedLabel = isStepper
+      ? chosen.category
+      : selection === "Other"
+        ? otherDraft.trim()
+        : selection;
     if (!resolvedLabel) {
       setMessage("Add a value to finish setup");
       return;

@@ -57,7 +57,7 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
 
   return (
     <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-plum-deep p-0 sm:p-6">
-      <main className="relative h-dvh max-h-[932px] w-full max-w-[430px] overflow-hidden rounded-none border-[#D5D0D5] bg-white text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
+      <main className="relative h-dvh max-h-[932px] w-full max-w-[430px] overflow-hidden rounded-none border-vf-soft-border bg-background text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
         <span className="absolute left-6 top-3 text-[11px] font-semibold" aria-hidden="true">9:41</span>
         <header className="absolute inset-x-0 top-10 h-14">
           <Button asChild variant="ghost" size="icon" className="absolute left-3 top-0 size-11 rounded-full text-[#29252A] focus-visible:ring-[3px] focus-visible:ring-plum">
@@ -83,7 +83,7 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
                 const checked = selection === option;
                 const inputId = `${from.replaceAll("/", "-")}-${option.toLowerCase().replaceAll(" ", "-")}`;
                 return (
-                  <div key={option} className={`relative flex min-h-11 items-center rounded-[10.5px] border bg-[#FFFEFC] px-4 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-vf-disc-lilac" : "border-[#DDD8DD]"}`}>
+                  <div key={option} className={`relative flex min-h-11 items-center rounded-[10.5px] border bg-vf-soft-surface px-4 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-vf-disc-lilac" : "border-vf-soft-border"}`}>
                     <span className="flex min-w-0 flex-1 items-center gap-2">
                       <label htmlFor={inputId} className="min-w-0 shrink cursor-pointer text-[16px] font-semibold leading-5">{option}</label>
                       {checked && option === "Other" ? (
@@ -98,14 +98,14 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
                             }}
                             maxLength={60}
                             autoComplete="off"
-                            className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-[#DDD8DD] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
+                            className="h-7 min-w-0 max-w-32 flex-1 border-0 border-b-2 border-vf-soft-border bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum focus-visible:ring-0"
                           />
                           <span className="shrink-0 text-[10px] font-normal text-[#737080]" aria-live="polite">{otherDraft.length}/60</span>
                         </span>
                       ) : null}
                     </span>
-                    <span className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border ${checked ? "border-vf-disc-lilac bg-vf-disc-lilac" : "border-[#B8B3BD] bg-white"}`} aria-hidden="true">
-                      {checked ? <Check className="size-3 text-white" strokeWidth={3} /> : null}
+                    <span className={`flex size-[18px] shrink-0 items-center justify-center rounded-full border ${checked ? "border-vf-disc-lilac bg-vf-disc-lilac" : "border-[#B8B3BD] bg-background"}`} aria-hidden="true">
+                      {checked ? <Check className="size-3 text-vf-on-plum" strokeWidth={3} /> : null}
                     </span>
                     <input
                       id={inputId}
@@ -126,9 +126,9 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
             </div>
           </fieldset>
 
-          <div className="shrink-0 bg-white px-6 pb-8 pt-2">
+          <div className="shrink-0 bg-background px-6 pb-8 pt-2">
             <p role="alert" className="mb-2 min-h-5 text-[13px] leading-5 text-plum">{message}</p>
-            <Button type="submit" className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-white shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">Continue</Button>
+            <Button type="submit" className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">Continue</Button>
           </div>
         </form>
       </main>

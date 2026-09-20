@@ -20,7 +20,7 @@ export const Route = createFileRoute("/check-in")({
 function CheckInPlaceholder() {
   return (
     <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-plum-deep p-0 sm:p-6">
-      <main className="relative flex h-dvh max-h-[932px] w-full max-w-[430px] flex-col items-center justify-center rounded-none border-[#D5D0D5] bg-white px-6 text-center text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
+      <main className="relative flex h-dvh max-h-[932px] w-full max-w-[430px] flex-col items-center justify-center rounded-none border-vf-soft-border bg-background px-6 text-center text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
         <Button asChild variant="ghost" size="icon" className="absolute left-3 top-10 size-11 rounded-full text-[#29252A] focus-visible:ring-[3px] focus-visible:ring-plum">
           <Link to="/transition" aria-label="Back"><ChevronLeft aria-hidden="true" /></Link>
         </Button>

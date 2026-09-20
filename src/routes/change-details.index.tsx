@@ -88,7 +88,7 @@ function ChangeDetails() {
 
   return (
     <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-plum-deep p-0 sm:p-6">
-      <main className="relative h-dvh max-h-[932px] w-full max-w-[430px] overflow-hidden rounded-none border-[#D5D0D5] bg-white text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
+      <main className="relative h-dvh max-h-[932px] w-full max-w-[430px] overflow-hidden rounded-none border-vf-soft-border bg-background text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
         <span className="absolute left-6 top-3 text-[11px] font-semibold" aria-hidden="true">9:41</span>
         <header className="absolute inset-x-0 top-10 h-14">
           <Button asChild variant="ghost" size="icon" className="absolute left-3 top-0 size-11 rounded-full text-[#29252A] focus-visible:ring-[3px] focus-visible:ring-plum">
@@ -108,12 +108,12 @@ function ChangeDetails() {
               <p className="mt-1 text-[14px] text-[#29252A]">Add the details for your chosen change.</p>
             </div>
 
-            <div className="min-h-0 flex-1 overflow-y-auto px-[23px] pb-3 pt-8">
+            <div className="min-h-0 flex-1 overflow-y-auto px-[23px] pb-3 pt-[17px]">
               {isStepper ? (
                 <StepperRow category={chosen.category} value={stepValue} unit={unit} step={step} maximum={maximum} onDecrease={() => updateStep(-step)} onIncrease={() => updateStep(step)} onKeyDown={handleStepKeys} />
               ) : (
                 <>
-                  <section className="relative h-[162px] w-full overflow-hidden rounded-[15px] border border-[#DDD8DD] bg-[#FFFEFC] p-4 shadow-[0_4px_6px_rgba(0,0,0,0.08)]" aria-label="Chosen supplement">
+                  <section className="relative h-[162px] w-full overflow-hidden rounded-[15px] border border-vf-soft-border bg-vf-soft-surface p-4 shadow-[0_4px_6px_rgba(0,0,0,0.08)]" aria-label="Chosen supplement">
                     <span className="text-[11px] text-[#29252A]">Supplement</span>
                     <p className="mt-2 text-[16px] font-semibold text-[#29252A]">{chosen.label}</p>
                     <span aria-hidden="true" className="absolute left-[256px] top-[19px] size-[62px] rounded-full bg-vf-disc-lilac opacity-30 blur-[9px]" />
@@ -123,7 +123,7 @@ function ChangeDetails() {
                     {fields.amount === "Other" ? (
                       <div className="-mt-[35px] flex justify-end">
                         <label htmlFor="other-amount" className="sr-only">Enter another amount</label>
-                        <input id="other-amount" value={otherAmount} onChange={(event) => { setOtherAmount(event.target.value.slice(0, 60)); setMessage(""); }} maxLength={60} className="h-7 max-w-32 border-0 border-b-2 border-[#DDD8DD] bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum" />
+                        <input id="other-amount" value={otherAmount} onChange={(event) => { setOtherAmount(event.target.value.slice(0, 60)); setMessage(""); }} maxLength={60} className="h-7 max-w-32 border-0 border-b-2 border-vf-soft-border bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum" />
                       </div>
                     ) : null}
                     <DetailSelect label="Frequency" value={fields.frequency} options={FREQUENCIES} onChange={(value) => { setFields((current) => ({ ...current, frequency: value })); setMessage(""); }} />
@@ -134,8 +134,8 @@ function ChangeDetails() {
               <p role="alert" className="mt-3 min-h-5 text-[13px] leading-5 text-plum">{message}</p>
             </div>
 
-            <div className="shrink-0 bg-white px-6 pb-8 pt-2">
-              <Button type="submit" className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-white shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">Finish setup</Button>
+            <div className="shrink-0 bg-background px-6 pb-8 pt-2">
+              <Button type="submit" className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">Finish setup</Button>
             </div>
           </form>
         )}
@@ -145,17 +145,17 @@ function ChangeDetails() {
 }
 
 function LoadingState() {
-  return <div className="absolute inset-x-6 top-[186px]" aria-label="Loading change details"><div className="h-7 w-52 rounded bg-[#E8E4E6]" /><div className="mt-3 h-5 w-72 rounded bg-[#E8E4E6]" /><div className="mt-8 h-[162px] rounded-[15px] border border-[#DDD8DD] bg-[#FFFEFC]" /></div>;
+  return <div className="absolute inset-x-6 top-[186px]" aria-label="Loading change details"><div className="h-7 w-52 rounded bg-[#E8E4E6]" /><div className="mt-3 h-5 w-72 rounded bg-[#E8E4E6]" /><div className="mt-8 h-[162px] rounded-[15px] border border-vf-soft-border bg-vf-soft-surface" /></div>;
 }
 
 function MissingState() {
-  return <section className="absolute inset-x-6 top-[186px]"><h1 className="text-[24px] font-semibold leading-tight">Hmm, we lost that.</h1><p className="mt-5 max-w-[330px] text-[16px] leading-6 text-[#737080]">Not you — us. Your choice didn't save properly. Let's go find it again.</p><Button asChild className="mt-8 min-h-11 rounded-full bg-plum text-white hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2"><Link to="/onboarding-step-4">Go back</Link></Button></section>;
+  return <section className="absolute inset-x-6 top-[186px]"><h1 className="text-[24px] font-semibold leading-tight">Hmm, we lost that.</h1><p className="mt-5 max-w-[330px] text-[16px] leading-6 text-[#737080]">Not you — us. Your choice didn't save properly. Let's go find it again.</p><Button asChild className="mt-8 min-h-11 rounded-full bg-plum text-vf-on-plum hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2"><Link to="/onboarding-step-4">Go back</Link></Button></section>;
 }
 
 type DetailSelectProps = { label: string; value: string; options: readonly string[]; onChange: (value: string) => void };
 function DetailSelect({ label, value, options, onChange }: DetailSelectProps) {
   const id = `detail-${label.toLowerCase().replaceAll(" ", "-").replaceAll("?", "")}`;
-  return <div className="relative h-[49px] rounded-[10.5px] border border-[#DDD8DD] bg-[#FFFEFC] px-3 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum"><label htmlFor={id} className="absolute -top-6 left-0 text-[11px] font-semibold text-[#29252A]">{label}</label><select id={id} value={value} onChange={(event) => onChange(event.target.value)} className="absolute inset-0 size-full cursor-pointer appearance-none bg-transparent px-3 pr-10 text-[13px] font-medium outline-none"><option value="">Select</option>{options.map((option) => <option key={option}>{option}</option>)}</select><ChevronDown aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 h-[7px] w-[7px] -translate-y-1/2 text-[#29252A]" strokeWidth={1.6} /></div>;
+  return <div className="relative h-[49px] rounded-[10.5px] border border-vf-soft-border bg-vf-soft-surface px-3 outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum"><label htmlFor={id} className="absolute -top-6 left-0 text-[11px] font-semibold text-[#29252A]">{label}</label><select id={id} value={value} onChange={(event) => onChange(event.target.value)} className="absolute inset-0 size-full cursor-pointer appearance-none bg-transparent px-3 pr-10 text-[13px] font-medium outline-none"><option value="">Select</option>{options.map((option) => <option key={option}>{option}</option>)}</select><ChevronDown aria-hidden="true" className="pointer-events-none absolute right-3 top-1/2 h-[7px] w-[7px] -translate-y-1/2 text-[#29252A]" strokeWidth={1.6} /></div>;
 }
 
 type StepperRowProps = { category: string; value: number; unit: string; step: number; maximum: number; onDecrease: () => void; onIncrease: () => void; onKeyDown: (event: KeyboardEvent<HTMLDivElement>) => void };

@@ -20,7 +20,7 @@ export const Route = createFileRoute("/transition")({
 function Transition() {
   return (
     <div className="vf-system-font flex min-h-dvh w-full items-center justify-center bg-plum-deep p-0 sm:p-6">
-      <main className="relative h-dvh max-h-[932px] w-full max-w-[430px] overflow-hidden rounded-none border-[#D5D0D5] bg-white px-6 text-center text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
+      <main className="relative h-dvh max-h-[932px] w-full max-w-[430px] overflow-hidden rounded-none border-vf-soft-border bg-background px-6 text-center text-[#29252A] sm:h-[932px] sm:rounded-[30px] sm:border">
         <span className="absolute left-6 top-3 text-[11px] font-semibold" aria-hidden="true">9:41</span>
         <Button asChild variant="ghost" size="icon" className="absolute left-3 top-10 size-11 rounded-full text-[#29252A] focus-visible:ring-[3px] focus-visible:ring-plum">
           <Link to="/onboarding-step-4" aria-label="Back to Change Category"><ChevronLeft aria-hidden="true" className="size-[18px]" strokeWidth={1.8} /></Link>
@@ -39,7 +39,7 @@ function Transition() {
         </section>
 
         <div className="absolute inset-x-6 bottom-8">
-          <Button asChild className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-white shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">
+          <Button asChild className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">
             <Link to="/check-in">Start today's check-in →</Link>
           </Button>
         </div>

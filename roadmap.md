@@ -15,3 +15,4 @@
 - [x] Build Change category Step 4 of 4: 2×3 icon tiles, single-select, save `vf.chosenChange`, verify styling, a11y, and retry behaviour
 - [x] Build Change Details, connect `vf.chosenChange`, save `vf.profile`, and add the Transition destination
 - [x] Add four Step 4 intermediate option screens, correct Change Details, and build the final Transition view
+- [x] Make the whole option row clickable on the four Step 4 selection screens and gate Continue on a selection

@@ -24,4 +24,5 @@
 - 430×932 and wider layouts, reduced motion, clean build, no console errors, no external requests.
 
 ## Technical note
-- The current `/check-in` file in the project has reverted to the older checkbox version; the approved ratings implementation exists in project history. Restore that ratings behaviour first, then apply the filtering above without redesigning the screen.
+- After the refresh, `/check-in` again holds the approved ratings version (ten scales, chosen-change pill, local save), so no restore is needed — the filtering is applied to that existing screen without redesigning it.
+- The ten scale names stay the source of truth for exact matching; only the list rendered and the ratings kept in state change.

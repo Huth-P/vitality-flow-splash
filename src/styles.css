@@ -217,3 +217,21 @@
     transition-duration: 0.01ms !important;
   }
 }
+
+.vf-confetti-piece {
+  position: absolute;
+  top: -12px;
+  pointer-events: none;
+  animation: vf-confetti-fall 1.5s ease-in forwards;
+}
+
+@keyframes vf-confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(340px) rotate(220deg);
+    opacity: 0;
+  }
+}

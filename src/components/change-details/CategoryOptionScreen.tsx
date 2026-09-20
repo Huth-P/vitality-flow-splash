@@ -132,7 +132,7 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
 
           <div className="shrink-0 bg-background px-6 pb-8 pt-2">
             <p role="alert" className="mb-2 min-h-5 text-[13px] leading-5 text-plum">{message}</p>
-            <Button type="submit" className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">Continue</Button>
+            <Button type="submit" disabled={!canContinue} className="h-[52px] w-full rounded-full bg-plum text-[18px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2 disabled:bg-plum disabled:opacity-45">Continue</Button>
           </div>
         </form>
       </main>

@@ -8,7 +8,7 @@ type ChosenChange = { category: string; label: string; unit?: string };
 type SupplementFields = { amount: string; frequency: string; when: string };
 
 const VALID_CATEGORIES = ["Supplements", "Meditation", "Hydration"];
-const AMOUNTS = ["50mg", "100mg", "200mg", "400mg", "500mg", "1000mg", "Other"];
+const AMOUNTS = ["50mg", "100mg", "200mg", "400mg", "500mg", "1000mg"];
 const FREQUENCIES = ["Once daily", "Twice daily", "As needed"];
 const TIMES = ["Morning", "Midday", "Evening", "Night", "With food"];
 
@@ -30,7 +30,6 @@ function ChangeDetails() {
   const [loaded, setLoaded] = useState(false);
   const [stepValue, setStepValue] = useState(10);
   const [fields, setFields] = useState<SupplementFields>({ amount: "", frequency: "", when: "" });
-  const [otherAmount, setOtherAmount] = useState("");
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -69,7 +68,7 @@ function ChangeDetails() {
   const handleFinish = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (!chosen) return;
-    const amount = fields.amount === "Other" ? otherAmount.trim() : fields.amount;
+    const amount = fields.amount;
     if (!isStepper && (!amount || !fields.frequency || !fields.when)) {
       setMessage("Add a value to finish setup");
       return;
@@ -119,13 +118,7 @@ function ChangeDetails() {
                     <span aria-hidden="true" className="absolute left-[256px] top-[19px] size-[62px] rounded-full bg-vf-disc-lilac opacity-30 blur-[9px]" />
                   </section>
                   <div className="mt-[57px] space-y-[45px]">
-                    <DetailSelect label="Amount" value={fields.amount} options={AMOUNTS} onChange={(value) => { setFields((current) => ({ ...current, amount: value })); setMessage(""); if (value !== "Other") setOtherAmount(""); }} />
-                    {fields.amount === "Other" ? (
-                      <div className="-mt-[35px] flex justify-end">
-                        <label htmlFor="other-amount" className="sr-only">Enter another amount</label>
-                        <input id="other-amount" value={otherAmount} onChange={(event) => { setOtherAmount(event.target.value.slice(0, 60)); setMessage(""); }} maxLength={60} className="h-7 max-w-32 border-0 border-b-2 border-vf-soft-border bg-transparent px-0 text-[13px] outline-none focus-visible:border-plum" />
-                      </div>
-                    ) : null}
+                    <DetailSelect label="Amount" value={fields.amount} options={AMOUNTS} onChange={(value) => { setFields((current) => ({ ...current, amount: value })); setMessage(""); }} />
                     <DetailSelect label="Frequency" value={fields.frequency} options={FREQUENCIES} onChange={(value) => { setFields((current) => ({ ...current, frequency: value })); setMessage(""); }} />
                     <DetailSelect label="When do you take it?" value={fields.when} options={TIMES} onChange={(value) => { setFields((current) => ({ ...current, when: value })); setMessage(""); }} />
                   </div>

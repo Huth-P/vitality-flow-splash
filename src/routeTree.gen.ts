@@ -13,10 +13,12 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AgeRangeRouteImport } from './routes/age-range'
 import { Route as ChangeDetailsRouteImport } from './routes/change-details'
 import { Route as CheckInRouteImport } from './routes/check-in'
+import { Route as CheckInCompleteRouteImport } from './routes/check-in-complete'
 import { Route as DailyDashboardRouteImport } from './routes/daily-dashboard'
 import { Route as JourneyStageRouteImport } from './routes/journey-stage'
 import { Route as OnboardingStep3RouteImport } from './routes/onboarding-step-3'
 import { Route as OnboardingStep4RouteImport } from './routes/onboarding-step-4'
+import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as TransitionRouteImport } from './routes/transition'
 import { Route as WelcomeRouteImport } from './routes/welcome'
 import { Route as ChangeDetailsIndexRouteImport } from './routes/change-details.index'
@@ -45,6 +47,11 @@ const CheckInRoute = CheckInRouteImport.update({
   path: '/check-in',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CheckInCompleteRoute = CheckInCompleteRouteImport.update({
+  id: '/check-in-complete',
+  path: '/check-in-complete',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DailyDashboardRoute = DailyDashboardRouteImport.update({
   id: '/daily-dashboard',
   path: '/daily-dashboard',
@@ -63,6 +70,11 @@ const OnboardingStep3Route = OnboardingStep3RouteImport.update({
 const OnboardingStep4Route = OnboardingStep4RouteImport.update({
   id: '/onboarding-step-4',
   path: '/onboarding-step-4',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TransitionRoute = TransitionRouteImport.update({
@@ -110,10 +122,12 @@ export interface FileRoutesByFullPath {
   '/age-range': typeof AgeRangeRoute
   '/change-details': typeof ChangeDetailsRouteWithChildren
   '/check-in': typeof CheckInRoute
+  '/check-in-complete': typeof CheckInCompleteRoute
   '/daily-dashboard': typeof DailyDashboardRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
+  '/progress': typeof ProgressRoute
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
   '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
@@ -126,10 +140,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/age-range': typeof AgeRangeRoute
   '/check-in': typeof CheckInRoute
+  '/check-in-complete': typeof CheckInCompleteRoute
   '/daily-dashboard': typeof DailyDashboardRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
+  '/progress': typeof ProgressRoute
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
   '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
@@ -144,10 +160,12 @@ export interface FileRoutesById {
   '/age-range': typeof AgeRangeRoute
   '/change-details': typeof ChangeDetailsRouteWithChildren
   '/check-in': typeof CheckInRoute
+  '/check-in-complete': typeof CheckInCompleteRoute
   '/daily-dashboard': typeof DailyDashboardRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
+  '/progress': typeof ProgressRoute
   '/transition': typeof TransitionRoute
   '/welcome': typeof WelcomeRoute
   '/change-details/dietary-changes': typeof ChangeDetailsDietaryChangesRoute
@@ -163,10 +181,12 @@ export interface FileRouteTypes {
     | '/age-range'
     | '/change-details'
     | '/check-in'
+    | '/check-in-complete'
     | '/daily-dashboard'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
+    | '/progress'
     | '/transition'
     | '/welcome'
     | '/change-details/dietary-changes'
@@ -179,10 +199,12 @@ export interface FileRouteTypes {
     | '/'
     | '/age-range'
     | '/check-in'
+    | '/check-in-complete'
     | '/daily-dashboard'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
+    | '/progress'
     | '/transition'
     | '/welcome'
     | '/change-details/dietary-changes'
@@ -196,10 +218,12 @@ export interface FileRouteTypes {
     | '/age-range'
     | '/change-details'
     | '/check-in'
+    | '/check-in-complete'
     | '/daily-dashboard'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
+    | '/progress'
     | '/transition'
     | '/welcome'
     | '/change-details/dietary-changes'
@@ -214,10 +238,12 @@ export interface RootRouteChildren {
   AgeRangeRoute: typeof AgeRangeRoute
   ChangeDetailsRoute: typeof ChangeDetailsRouteWithChildren
   CheckInRoute: typeof CheckInRoute
+  CheckInCompleteRoute: typeof CheckInCompleteRoute
   DailyDashboardRoute: typeof DailyDashboardRoute
   JourneyStageRoute: typeof JourneyStageRoute
   OnboardingStep3Route: typeof OnboardingStep3Route
   OnboardingStep4Route: typeof OnboardingStep4Route
+  ProgressRoute: typeof ProgressRoute
   TransitionRoute: typeof TransitionRoute
   WelcomeRoute: typeof WelcomeRoute
 }
@@ -252,6 +278,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CheckInRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/check-in-complete': {
+      id: '/check-in-complete'
+      path: '/check-in-complete'
+      fullPath: '/check-in-complete'
+      preLoaderRoute: typeof CheckInCompleteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/daily-dashboard': {
       id: '/daily-dashboard'
       path: '/daily-dashboard'
@@ -278,6 +311,13 @@ declare module '@tanstack/react-router' {
       path: '/onboarding-step-4'
       fullPath: '/onboarding-step-4'
       preLoaderRoute: typeof OnboardingStep4RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/transition': {
@@ -357,10 +397,12 @@ const rootRouteChildren: RootRouteChildren = {
   AgeRangeRoute: AgeRangeRoute,
   ChangeDetailsRoute: ChangeDetailsRouteWithChildren,
   CheckInRoute: CheckInRoute,
+  CheckInCompleteRoute: CheckInCompleteRoute,
   DailyDashboardRoute: DailyDashboardRoute,
   JourneyStageRoute: JourneyStageRoute,
   OnboardingStep3Route: OnboardingStep3Route,
   OnboardingStep4Route: OnboardingStep4Route,
+  ProgressRoute: ProgressRoute,
   TransitionRoute: TransitionRoute,
   WelcomeRoute: WelcomeRoute,
 }

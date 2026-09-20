@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
-import { Check, ChevronLeft, MoreHorizontal } from "lucide-react";
+import { ChevronLeft, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
@@ -173,7 +173,6 @@ function DailyCheckIn() {
   const [chosenChange, setChosenChange] = useState("");
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("");
-  const [saved, setSaved] = useState(false);
   const [focusedRating, setFocusedRating] = useState("");
 
   useEffect(() => {
@@ -227,28 +226,11 @@ function DailyCheckIn() {
       window.localStorage.setItem("vf.checkIns", JSON.stringify(checkIns));
       setDateKey(resolvedDate);
       setMessage("");
-      setSaved(true);
+      navigate({ to: "/check-in-complete" });
     } catch {
       setMessage("We couldn't save your check-in just now. Please try again.");
     }
   };
-
-  if (saved) {
-    return (
-      <Frame>
-        <section className="flex h-full flex-col items-center justify-center px-6 text-center">
-          <span className="flex size-16 items-center justify-center rounded-full bg-plum text-vf-on-plum" aria-hidden="true">
-            <Check className="size-8" strokeWidth={2} />
-          </span>
-          <h1 className="mt-7 text-[28px] font-semibold leading-tight">Check-in saved.</h1>
-          <p className="mt-3 max-w-[310px] text-[15px] leading-6 text-[#5E5B66]">Your notes and selections are safely stored on this device.</p>
-          <Button type="button" onClick={() => navigate({ to: "/daily-dashboard" })} className="mt-10 h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">
-            Go to Daily Dashboard
-          </Button>
-        </section>
-      </Frame>
-    );
-  }
 
   return (
     <Frame>

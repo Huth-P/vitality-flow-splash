@@ -1,10 +1,10 @@
 # Vitality Flow
 
+![Vitality Flow — One change. One month. A clearer view.](assets/vitality-flow-thumbnail.png)
+
 **One change at a time.**
 
-Vitality Flow is a privacy-first wellness tracking app designed to help women navigate perimenopause and menopause by tracking symptoms, lifestyle changes, and personal patterns over time.
-
-> This project is currently being developed as part of the Elevate Women Global Hackathon 2026.
+Vitality Flow is a wellness tracking app designed to help women navigate perimenopause and menopause by understanding their symptoms and patterns over time.
 
 ## About
 

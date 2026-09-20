@@ -95,10 +95,6 @@ function ChangeCategory() {
                 return (
                   <label
                     key={label}
-                    onClick={() => {
-                      setSelected(label);
-                      setSaveMessage("");
-                    }}
                     className={`relative flex h-[158px] cursor-pointer flex-col items-center justify-center rounded-[16px] text-center outline-none focus-within:outline-[3px] focus-within:outline-offset-2 focus-within:outline-plum ${checked ? "border-2 border-plum bg-vf-tile" : "border border-[#D5D0D5] bg-vf-tile"}`}
                   >
                     <input
@@ -106,7 +102,7 @@ function ChangeCategory() {
                       name="change-category"
                       value={label}
                       checked={checked}
-                      onChange={() => {
+                      onClick={() => {
                         setSelected(label);
                         setSaveMessage("");
                       }}

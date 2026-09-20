@@ -246,9 +246,9 @@ function DailyCheckIn() {
                   {[0, 1, 2, 3, 4, 5].map((rating) => {
                     const checked = ratings[symptom.name] === rating;
                     return (
-                      <label key={rating} className="flex min-h-11 min-w-0 cursor-pointer items-center justify-center rounded-[8px] outline-none focus-within:outline-[3px] focus-within:outline-offset-1 focus-within:outline-plum">
-                        <input type="radio" name={`rating-${symptom.name}`} value={rating} checked={checked} onChange={() => setRating(symptom.name, rating)} className="sr-only" />
-                        <span className={`flex size-8 items-center justify-center rounded-full border text-[13px] font-semibold ${checked ? "border-plum bg-plum text-vf-on-plum" : "border-[#737080] bg-cream text-[#2A292F]"}`}>{rating}</span>
+                      <label key={rating} className="relative flex min-h-11 min-w-0 cursor-pointer items-center justify-center rounded-[8px] outline-none focus-within:outline-[3px] focus-within:outline-offset-1 focus-within:outline-plum">
+                        <input type="radio" name={`rating-${symptom.name}`} value={rating} checked={checked} onChange={() => setRating(symptom.name, rating)} className="absolute inset-0 cursor-pointer opacity-0" />
+                        <span className={`pointer-events-none flex size-8 items-center justify-center rounded-full border text-[13px] font-semibold ${checked ? "border-plum bg-plum text-vf-on-plum" : "border-[#737080] bg-cream text-[#2A292F]"}`}>{rating}</span>
                       </label>
                     );
                   })}

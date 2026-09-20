@@ -62,12 +62,14 @@ function normaliseStoredDate(value: string | null) {
 function formatDate(dateKey: string) {
   const [year, month, day] = dateKey.split("-").map(Number);
   if (!year || !month || !day) return "";
-  return new Intl.DateTimeFormat("en-GB", {
-    weekday: "long",
+  const date = new Date(year, month - 1, day);
+  const weekday = new Intl.DateTimeFormat("en-GB", { weekday: "long" }).format(date);
+  const calendarDate = new Intl.DateTimeFormat("en-GB", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  }).format(new Date(year, month - 1, day));
+  }).format(date);
+  return `${weekday}, ${calendarDate}`;
 }
 
 function parseCheckIns(value: string | null): CheckIns {

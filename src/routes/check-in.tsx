@@ -4,22 +4,36 @@ import { Check, ChevronLeft, MoreHorizontal } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 
-const SYMPTOM_OPTIONS = [
-  "Trouble sleeping",
-  "Hot flashes or night sweats",
-  "Mood swings or irritability",
-  "Brain fog or memory lapses",
-  "Joint or muscle aches",
-  "Low energy or fatigue",
-  "Weight changes",
-  "Low interest in sex",
-  "Anxiety or feeling on edge",
-  "Other",
+const SYMPTOM_SCALES = [
+  { name: "Trouble sleeping", low: "Sleeping well", high: "Can't sleep" },
+  { name: "Hot flashes", low: "None", high: "Very frequent" },
+  { name: "Mood swings", low: "Very stable", high: "Very unstable" },
+  { name: "Brain fog", low: "Crystal clear", high: "Very foggy" },
+  { name: "Joint aches", low: "No pain", high: "Severe pain" },
+  { name: "Low energy", low: "Full energy", high: "Completely exhausted" },
+  { name: "Weight changes", low: "No change", high: "Significant change" },
+  { name: "Low interest in sex", low: "Very interested", high: "No interest" },
+  { name: "Anxiety", low: "Very calm", high: "Very anxious" },
+  { name: "Other", low: "Not present", high: "Very present" },
 ] as const;
+
+type SymptomName = (typeof SYMPTOM_SCALES)[number]["name"];
+type Ratings = Partial<Record<SymptomName, number>>;
+
+type ChosenChange = {
+  category?: unknown;
+  label?: unknown;
+  amount?: unknown;
+  value?: unknown;
+  unit?: unknown;
+  frequency?: unknown;
+  when?: unknown;
+};
 
 type CheckIn = {
   date: string;
-  symptoms: string[];
+  ratings?: Ratings;
+  symptoms?: string[];
   notes: string;
 };
 
@@ -79,14 +93,61 @@ function parseCheckIns(value: string | null): CheckIns {
   return parsed as CheckIns;
 }
 
+function parseChosenChange(value: string | null): ChosenChange | null {
+  if (!value) return null;
+  const parsed: unknown = JSON.parse(value);
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) return null;
+  const profile = parsed as ChosenChange & { chosenChange?: unknown };
+  if (profile.chosenChange && typeof profile.chosenChange === "object" && !Array.isArray(profile.chosenChange)) {
+    return profile.chosenChange as ChosenChange;
+  }
+  return profile;
+}
+
+function formatAmount(value: string) {
+  return value.replace(/^(\d+(?:\.\d+)?)\s*([a-zA-Z]+)$/, "$1 $2");
+}
+
+function formatChosenChange(change: ChosenChange | null) {
+  if (!change) return "";
+  const details: string[] = [];
+  const label = typeof change.label === "string" && change.label.trim()
+    ? change.label.trim()
+    : typeof change.category === "string"
+      ? change.category.trim()
+      : "";
+  if (label) details.push(label);
+
+  if (typeof change.amount === "string" && change.amount.trim()) {
+    details.push(formatAmount(change.amount.trim()));
+  } else if ((typeof change.value === "number" || typeof change.value === "string") && String(change.value).trim()) {
+    const unit = typeof change.unit === "string" ? change.unit.trim() : "";
+    details.push([String(change.value), unit].filter(Boolean).join(" "));
+  }
+
+  if (typeof change.frequency === "string" && change.frequency.trim()) details.push(change.frequency.trim().toLocaleLowerCase("en-GB"));
+  if (typeof change.when === "string" && change.when.trim()) details.push(change.when.trim().toLocaleLowerCase("en-GB"));
+  return details.join(" · ");
+}
+
+function getStoredRatings(checkIn: CheckIn | undefined): Ratings {
+  if (!checkIn?.ratings || typeof checkIn.ratings !== "object" || Array.isArray(checkIn.ratings)) return {};
+  return Object.fromEntries(
+    SYMPTOM_SCALES.flatMap(({ name }) => {
+      const value = checkIn.ratings?.[name];
+      return typeof value === "number" && Number.isInteger(value) && value >= 0 && value <= 5 ? [[name, value]] : [];
+    }),
+  ) as Ratings;
+}
+
 function DailyCheckIn() {
   const navigate = useNavigate({ from: "/check-in" });
   const [dateKey, setDateKey] = useState("");
-  const [symptoms, setSymptoms] = useState<string[]>([]);
+  const [ratings, setRatings] = useState<Ratings>({});
+  const [chosenChange, setChosenChange] = useState("");
   const [notes, setNotes] = useState("");
   const [message, setMessage] = useState("");
   const [saved, setSaved] = useState(false);
-  const [focusedSymptom, setFocusedSymptom] = useState<string | null>(null);
 
   useEffect(() => {
     const fallbackDate = getLocalDateKey();
@@ -95,9 +156,11 @@ function DailyCheckIn() {
       window.localStorage.setItem("vf.today", today);
       const checkIns = parseCheckIns(window.localStorage.getItem("vf.checkIns"));
       const existing = checkIns[today];
+      const profile = parseChosenChange(window.localStorage.getItem("vf.profile"));
       setDateKey(today);
+      setChosenChange(formatChosenChange(profile));
       if (existing) {
-        setSymptoms(Array.isArray(existing.symptoms) ? existing.symptoms.slice(0, 3) : []);
+        setRatings(getStoredRatings(existing));
         setNotes(typeof existing.notes === "string" ? existing.notes : "");
       }
     } catch {
@@ -106,19 +169,15 @@ function DailyCheckIn() {
     }
   }, []);
 
-  const toggleSymptom = (symptom: string) => {
+  const setRating = (symptom: SymptomName, rating: number) => {
     setMessage("");
-    setSymptoms((current) => {
-      if (current.includes(symptom)) return current.filter((item) => item !== symptom);
-      if (current.length === 3) return current;
-      return [...current, symptom];
-    });
+    setRatings((current) => ({ ...current, [symptom]: rating }));
   };
 
   const handleSave = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (symptoms.length === 0) {
-      setMessage("Select at least one symptom to save");
+    if (Object.keys(ratings).length === 0) {
+      setMessage("Select at least one rating to save");
       return;
     }
 
@@ -130,7 +189,7 @@ function DailyCheckIn() {
       } catch {
         checkIns = {};
       }
-      checkIns[resolvedDate] = { date: resolvedDate, symptoms, notes };
+      checkIns[resolvedDate] = { date: resolvedDate, ratings, notes };
       window.localStorage.setItem("vf.today", resolvedDate);
       window.localStorage.setItem("vf.checkIns", JSON.stringify(checkIns));
       setDateKey(resolvedDate);
@@ -170,32 +229,40 @@ function DailyCheckIn() {
         </Button>
       </header>
 
-      <form className="absolute inset-x-6 bottom-0 top-[108px]" onSubmit={handleSave}>
+      <form className="absolute inset-x-0 bottom-0 top-[108px] overflow-y-auto px-6" onSubmit={handleSave}>
         <time dateTime={dateKey} className="block min-h-5 text-[14px] text-[#5E5B66]">{dateKey ? formatDate(dateKey) : "Today"}</time>
-        <h1 className="mt-7 text-[28px] font-semibold leading-[1.12]">How are you feeling today?</h1>
+        <h1 className="mt-5 text-[28px] font-semibold leading-[1.12]">How are you feeling today?</h1>
         <p className="mt-3 text-[16px] leading-6 text-[#5E5B66]">Track the change you chose during setup.</p>
 
-        <fieldset className="mt-7" aria-describedby="symptom-count check-in-message">
-          <legend className="sr-only">Symptoms</legend>
-          <div className="mb-2 flex items-center justify-between">
-            <span className="text-[13px] font-medium">Symptoms</span>
-            <span id="symptom-count" className="rounded-full bg-vf-lavender px-2.5 py-1 text-[12px] font-semibold text-plum" aria-live="polite">{symptoms.length} of 3</span>
-          </div>
-          <div className="grid grid-cols-2 gap-x-3 gap-y-2">
-            {SYMPTOM_OPTIONS.map((symptom) => {
-              const checked = symptoms.includes(symptom);
-              return (
-                <label key={symptom} className={`flex h-12 cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[12px] leading-[1.15] outline-none ${focusedSymptom === symptom ? "vf-focus-ring" : ""} ${checked ? "border-plum bg-plum text-vf-on-plum" : "border-vf-soft-border bg-vf-soft-surface text-[#2A292F]"}`}>
-                  <input type="checkbox" name="symptoms" value={symptom} checked={checked} onChange={() => toggleSymptom(symptom)} onFocus={() => setFocusedSymptom(symptom)} onBlur={() => setFocusedSymptom(null)} className="sr-only" />
-                  <span className="min-w-0 flex-1">{symptom}</span>
-                  <span aria-hidden="true" className={`size-4 shrink-0 rounded-full border ${checked ? "border-vf-on-plum bg-vf-on-plum" : "border-[#737080]"}`} />
-                </label>
-              );
-            })}
-          </div>
-        </fieldset>
+        {chosenChange ? <p className="mt-4 w-fit max-w-full rounded-full bg-vf-lavender px-4 py-2 text-[13px] font-semibold leading-5 text-plum">{chosenChange}</p> : null}
 
-        <div className="mt-6">
+        <section className="mt-7" aria-labelledby="ratings-heading">
+          <h2 id="ratings-heading" className="text-[16px] font-semibold">Symptoms</h2>
+          <div className="mt-3 space-y-5">
+            {SYMPTOM_SCALES.map((symptom) => (
+              <fieldset key={symptom.name} className="rounded-[8px] border border-vf-soft-border bg-vf-soft-surface px-3 pb-3 pt-2">
+                <legend className="px-1 text-[14px] font-semibold leading-5">{symptom.name}</legend>
+                <div className="mt-1 grid grid-cols-6 gap-1" aria-label={`${symptom.name} rating from 0 to 5`}>
+                  {[0, 1, 2, 3, 4, 5].map((rating) => {
+                    const checked = ratings[symptom.name] === rating;
+                    return (
+                      <label key={rating} className="flex min-h-11 min-w-0 cursor-pointer items-center justify-center rounded-[8px] outline-none focus-within:outline-[3px] focus-within:outline-offset-1 focus-within:outline-plum">
+                        <input type="radio" name={`rating-${symptom.name}`} value={rating} checked={checked} onChange={() => setRating(symptom.name, rating)} className="sr-only" />
+                        <span className={`flex size-8 items-center justify-center rounded-full border text-[13px] font-semibold ${checked ? "border-plum bg-plum text-vf-on-plum" : "border-[#737080] bg-cream text-[#2A292F]"}`}>{rating}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+                <div className="mt-1 flex items-start justify-between gap-4 text-[11px] leading-4 text-[#5E5B66]">
+                  <span className="max-w-[44%]">{symptom.low}</span>
+                  <span className="max-w-[44%] text-right">{symptom.high}</span>
+                </div>
+              </fieldset>
+            ))}
+          </div>
+        </section>
+
+        <div className="mt-7">
           <label htmlFor="check-in-notes" className="block text-[16px] font-semibold">Anything else to note?</label>
           <textarea
             id="check-in-notes"
@@ -210,7 +277,7 @@ function DailyCheckIn() {
           />
         </div>
 
-        <div className="absolute inset-x-0 bottom-4">
+        <div className="pb-4 pt-4">
           <p id="check-in-message" role="alert" className="mb-1 min-h-5 text-[12px] leading-5 text-plum">{message}</p>
           <Button type="submit" className="h-[52px] w-full rounded-[16px] bg-plum text-[16px] font-semibold text-vf-on-plum shadow-none hover:bg-plum focus-visible:ring-[3px] focus-visible:ring-plum focus-visible:ring-offset-2">Save check-in &gt;</Button>
           <p className="mt-2 text-center text-[11px] leading-4 text-[#5E5B66]">Your selections stay on this device. Nothing is sent to a server.</p>

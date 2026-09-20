@@ -30,9 +30,10 @@ Vitality Flow is designed for self-tracking and educational purposes. It does no
 flowchart TB
 
     A["🌱 Journey"] --> B["💭 Symptoms"] --> C["🎯 Main focus"] --> D["✨ One change"]
+
     E["📝 Check-in"] --> F["📈 10 days"] --> G["💡 Patterns"] --> H["📋 Summary"]
 
-    D --> E
+    D --> H
 
     A ~~~ E
     B ~~~ F

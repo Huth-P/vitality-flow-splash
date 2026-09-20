@@ -6,8 +6,6 @@ import { readMainFocus } from "@/lib/main-focus";
 
 const TOTAL_DAYS = 30;
 const PRIMARY_SYMPTOM = "Trouble sleeping";
-const EMPTY_STATE_COPY =
-  "A pattern will emerge. Check in for 7 days, and we'll show you possible connections in your records.";
 
 type Entry = { date: string; ratings: Record<string, number> };
 type Point = { date: string; value: number };
@@ -214,7 +212,39 @@ function Progress() {
               <p className="mt-2 text-[15px] leading-6 text-[#737080]">{describeTrend(points, symptom)}</p>
             </>
           ) : (
-            <p className="mt-6 text-center text-[16px] leading-6 text-[#737080]">{EMPTY_STATE_COPY}</p>
+            <>
+              <section className="mt-3 flex flex-col items-center rounded-[16px] border border-[#D9D3CC] bg-cream px-5 py-8">
+                <svg
+                  width="64"
+                  height="44"
+                  viewBox="0 0 64 44"
+                  fill="none"
+                  aria-hidden="true"
+                  className="opacity-40"
+                >
+                  <path d="M6 3v37h54" stroke="#737080" strokeWidth="2" strokeLinecap="round" />
+                  <path
+                    d="M12 30l10-8 9 4 12-13 13 6"
+                    stroke="#737080"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                  <circle cx="12" cy="30" r="2.5" fill="#737080" />
+                  <circle cx="22" cy="22" r="2.5" fill="#737080" />
+                  <circle cx="31" cy="26" r="2.5" fill="#737080" />
+                  <circle cx="43" cy="13" r="2.5" fill="#737080" />
+                  <circle cx="56" cy="19" r="2.5" fill="#737080" />
+                </svg>
+                <p className="mt-4 text-[14px] text-[#989694]">Patterns will show here on Day 7</p>
+              </section>
+              <section className="mt-4 rounded-[16px] border border-[#E8C8C8] bg-[#F9E8E8] p-5">
+                <p className="text-[18px] font-medium text-[#2A292F]">A pattern will emerge</p>
+                <p className="mt-2 text-[14px] leading-6 text-[#737080]">
+                  Check in for 7 days, and we'll show you possible connections in your records.
+                </p>
+              </section>
+            </>
           )}
 
           <p className="mt-8 text-center text-[13px] text-[#737080]">Educational only · not a diagnosis</p>

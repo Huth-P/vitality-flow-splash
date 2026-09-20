@@ -17,4 +17,4 @@
 - [x] Add four Step 4 intermediate option screens, correct Change Details, and build the final Transition view
 - [x] Make the whole option row clickable on the four Step 4 selection screens and gate Continue on a selection
 - [x] Build and verify Daily Check-in Screen 08 with local saves, confirmation, and Daily Dashboard handoff
-- [ ] Replace Daily Check-in symptom selection with change-aware 0–5 ratings and verify compatibility
+- [x] Replace Daily Check-in symptom selection with change-aware 0–5 ratings and verify compatibility

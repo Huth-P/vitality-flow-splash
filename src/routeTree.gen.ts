@@ -15,6 +15,7 @@ import { Route as ChangeDetailsRouteImport } from './routes/change-details'
 import { Route as CheckInRouteImport } from './routes/check-in'
 import { Route as CheckInCompleteRouteImport } from './routes/check-in-complete'
 import { Route as DailyDashboardRouteImport } from './routes/daily-dashboard'
+import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as JourneyStageRouteImport } from './routes/journey-stage'
 import { Route as OnboardingStep3RouteImport } from './routes/onboarding-step-3'
 import { Route as OnboardingStep4RouteImport } from './routes/onboarding-step-4'
@@ -55,6 +56,11 @@ const CheckInCompleteRoute = CheckInCompleteRouteImport.update({
 const DailyDashboardRoute = DailyDashboardRouteImport.update({
   id: '/daily-dashboard',
   path: '/daily-dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InsightsRoute = InsightsRouteImport.update({
+  id: '/insights',
+  path: '/insights',
   getParentRoute: () => rootRouteImport,
 } as any)
 const JourneyStageRoute = JourneyStageRouteImport.update({
@@ -124,6 +130,7 @@ export interface FileRoutesByFullPath {
   '/check-in': typeof CheckInRoute
   '/check-in-complete': typeof CheckInCompleteRoute
   '/daily-dashboard': typeof DailyDashboardRoute
+  '/insights': typeof InsightsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
@@ -142,6 +149,7 @@ export interface FileRoutesByTo {
   '/check-in': typeof CheckInRoute
   '/check-in-complete': typeof CheckInCompleteRoute
   '/daily-dashboard': typeof DailyDashboardRoute
+  '/insights': typeof InsightsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
@@ -162,6 +170,7 @@ export interface FileRoutesById {
   '/check-in': typeof CheckInRoute
   '/check-in-complete': typeof CheckInCompleteRoute
   '/daily-dashboard': typeof DailyDashboardRoute
+  '/insights': typeof InsightsRoute
   '/journey-stage': typeof JourneyStageRoute
   '/onboarding-step-3': typeof OnboardingStep3Route
   '/onboarding-step-4': typeof OnboardingStep4Route
@@ -183,6 +192,7 @@ export interface FileRouteTypes {
     | '/check-in'
     | '/check-in-complete'
     | '/daily-dashboard'
+    | '/insights'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
@@ -201,6 +211,7 @@ export interface FileRouteTypes {
     | '/check-in'
     | '/check-in-complete'
     | '/daily-dashboard'
+    | '/insights'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
@@ -220,6 +231,7 @@ export interface FileRouteTypes {
     | '/check-in'
     | '/check-in-complete'
     | '/daily-dashboard'
+    | '/insights'
     | '/journey-stage'
     | '/onboarding-step-3'
     | '/onboarding-step-4'
@@ -240,6 +252,7 @@ export interface RootRouteChildren {
   CheckInRoute: typeof CheckInRoute
   CheckInCompleteRoute: typeof CheckInCompleteRoute
   DailyDashboardRoute: typeof DailyDashboardRoute
+  InsightsRoute: typeof InsightsRoute
   JourneyStageRoute: typeof JourneyStageRoute
   OnboardingStep3Route: typeof OnboardingStep3Route
   OnboardingStep4Route: typeof OnboardingStep4Route
@@ -290,6 +303,13 @@ declare module '@tanstack/react-router' {
       path: '/daily-dashboard'
       fullPath: '/daily-dashboard'
       preLoaderRoute: typeof DailyDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/insights': {
+      id: '/insights'
+      path: '/insights'
+      fullPath: '/insights'
+      preLoaderRoute: typeof InsightsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/journey-stage': {
@@ -399,6 +419,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckInRoute: CheckInRoute,
   CheckInCompleteRoute: CheckInCompleteRoute,
   DailyDashboardRoute: DailyDashboardRoute,
+  InsightsRoute: InsightsRoute,
   JourneyStageRoute: JourneyStageRoute,
   OnboardingStep3Route: OnboardingStep3Route,
   OnboardingStep4Route: OnboardingStep4Route,

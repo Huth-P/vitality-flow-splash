@@ -22,6 +22,7 @@ export function CategoryOptionScreen({ category, from }: CategoryOptionScreenPro
   const [otherDraft, setOtherDraft] = useState("");
   const [message, setMessage] = useState("");
   const options = CHANGE_CATEGORY_OPTIONS[category];
+  const canContinue = selection !== "" && (selection !== "Other" || otherDraft.trim() !== "");
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();

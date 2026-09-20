@@ -13,3 +13,4 @@
 - [x] Build and verify Main Focus Step 3 and its Step 4 destination
 - [x] Place the Step 3 “Other” input inline and verify existing selection, save, clearing, and cap behaviour
 - [x] Build Change category Step 4 of 4: 2×3 icon tiles, single-select, save vf.onboarding.step4a, verify styling, a11y, and retry behaviour
+- [ ] Build Change Details, connect `vf.chosenChange`, save `vf.profile`, and add the Transition destination
